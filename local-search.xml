@@ -4,6 +4,62 @@
   
   
   <entry>
+    <title>React</title>
+    <link href="/2025/12/15/React/"/>
+    <url>/2025/12/15/React/</url>
+    
+    <content type="html"><![CDATA[<h1>React</h1><h2 id="Let’s-start">Let’s start</h2><h3 id="方法一：使用官方推荐工具（最快）">方法一：使用官方推荐工具（最快）</h3><h4 id="1-使用-Vite（推荐）">1. 使用 Vite（推荐）</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 使用 npm</span><br>npm create vite@latest my-react-app -- --template react<br><span class="hljs-comment"># 或使用 yarn</span><br>yarn create vite my-react-app --template react<br><span class="hljs-comment"># 或使用 pnpm</span><br>pnpm create vite my-react-app --template react<br><br><span class="hljs-comment"># 进入项目目录</span><br><span class="hljs-built_in">cd</span> my-react-app<br><br><span class="hljs-comment"># 安装依赖</span><br>npm install<br><span class="hljs-comment"># 或</span><br>yarn<br><span class="hljs-comment"># 或</span><br>pnpm install<br><br><span class="hljs-comment"># 启动开发服务器</span><br>npm run dev<br></code></pre></td></tr></table></figure><h4 id="2-使用-Create-React-App（传统方式）">2. 使用 Create React App（传统方式）</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">npx create-react-app my-app<br><span class="hljs-built_in">cd</span> my-app<br>npm start<br></code></pre></td></tr></table></figure><h3 id="方法二：手动搭建（了解原理）">方法二：手动搭建（了解原理）</h3><h4 id="1-初始化项目">1. 初始化项目</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> my-react-app<br><span class="hljs-built_in">cd</span> my-react-app<br>npm init -y<br></code></pre></td></tr></table></figure><h4 id="2-安装依赖">2. 安装依赖</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 安装 React 核心库</span><br>npm install react react-dom<br><br><span class="hljs-comment"># 安装开发依赖</span><br>npm install -D @types/react @types/react-dom typescript vite<br><span class="hljs-comment"># 如果需要，可以安装其他工具如 eslint, prettier 等</span><br></code></pre></td></tr></table></figure><h4 id="3-创建项目结构">3. 创建项目结构</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash">my-react-app/<br>├── index.html<br>├── package.json<br>├── tsconfig.json（如果使用 TypeScript）<br>├── vite.config.ts<br>├── public/<br>└── src/<br>    ├── App.tsx<br>    ├── main.tsx<br>    └── index.css<br></code></pre></td></tr></table></figure><h4 id="4-配置文件">4. 配置文件</h4><p><strong>index.html</strong></p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;zh-CN&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span> /&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0&quot;</span> /&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>React App<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;root&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;module&quot;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;/src/main.tsx&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></td></tr></table></figure><p><strong>vite.config.ts</strong></p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">import</span> &#123; defineConfig &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vite&#x27;</span><br><span class="hljs-keyword">import</span> react <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@vitejs/plugin-react&#x27;</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title function_">defineConfig</span>(&#123;<br>  <span class="hljs-attr">plugins</span>: [<span class="hljs-title function_">react</span>()],<br>&#125;)<br></code></pre></td></tr></table></figure><p><strong>src/main.tsx</strong></p><figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs tsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">ReactDOM</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-dom/client&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">App</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./App&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;./index.css&#x27;</span><br><br><span class="hljs-title class_">ReactDOM</span>.<span class="hljs-title function_">createRoot</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;root&#x27;</span>)!).<span class="hljs-title function_">render</span>(<br>  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">React.StrictMode</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span></span><br><span class="language-xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">React.StrictMode</span>&gt;</span></span><br>)<br></code></pre></td></tr></table></figure><p><strong>src/App.tsx</strong></p><figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs tsx"><span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-keyword">return</span> (<br>    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;App&quot;</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello React!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>  )<br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">App</span><br></code></pre></td></tr></table></figure><h4 id="5-添加脚本到-package-json">5. 添加脚本到 package.json</h4><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;scripts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;dev&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;vite&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;build&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;vite build&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;preview&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;vite preview&quot;</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure><h3 id="方法三：使用-Next-js（全栈方案）">方法三：使用 Next.js（全栈方案）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">npx create-next-app@latest my-app<br><span class="hljs-built_in">cd</span> my-app<br>npm run dev<br></code></pre></td></tr></table></figure><h2 id="组件">组件</h2><ul><li>React 允许你将标签、CSS 和 JavaScript 组合成自定义“组件”，即 <strong>应用程序中可复用的 UI 元素</strong></li><li>定义组件：<strong>React 组件是一段可以 使用标签进行扩展 的 JavaScript 函数</strong></li></ul><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">Profile</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-keyword">return</span> (<br>    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">img</span></span></span><br><span class="hljs-tag"><span class="language-xml">      <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://i.imgur.com/MK3eW3Am.jpg&quot;</span></span></span><br><span class="hljs-tag"><span class="language-xml">      <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;Katherine Johnson&quot;</span></span></span><br><span class="hljs-tag"><span class="language-xml">    /&gt;</span></span><br>  )<br>&#125;<br></code></pre></td></tr></table></figure><ul><li><p>小写开头标签指的是 HTML 标签。</p><p>大写开头标签指的是自定义组件。</p></li><li><p>不要嵌套定义</p></li><li><p>分文件组织定义</p></li><li><p><strong>通常，文件中仅包含一个组件时，人们会选择默认导出，而当文件中包含多个组件或某个值需要导出时，则会选择具名导出。</strong></p></li><li><p><strong>在 React 中，渲染逻辑和标签共同存在于同一个地方——组件</strong></p></li><li><p><strong>JSX</strong></p><ul><li>只能返回一个根元素</li><li>标签必须闭合</li><li>使用驼峰式命名法给 所有 大部分属性命名</li><li>使用大括号来引用值，使用引号来引用字符串</li><li>使用 “双大括号”：JSX 中的 CSS 和 对象</li></ul></li><li><p><strong>Props</strong></p><ul><li>要传递 props，请将它们添加到 JSX，就像使用 HTML 属性一样。</li><li>要读取 props，请使用 <code>function Avatar({ person, size })</code> 解构语法。</li><li>你可以指定一个默认值，如 <code>size = 100</code>，用于缺少值或值为 <code>undefined</code> 的 props 。</li><li>你可以使用 <code>&lt;Avatar {...props} /&gt;</code> JSX 展开语法转发所有 props，但不要过度使用它！</li><li>像 <code>&lt;Card&gt;&lt;Avatar /&gt;&lt;/Card&gt;</code> 这样的嵌套 JSX，将被视为 <code>Card</code> 组件的 <code>children</code> prop。</li><li>Props 是只读的时间快照：每次渲染都会收到新版本的 props。</li><li>你不能改变 props。当你需要交互性时，你可以设置 state。</li></ul></li><li><p><strong>渲染</strong></p><ul><li>在 React，你可以使用 JavaScript 来控制分支逻辑。</li><li>你可以使用 <code>if</code> 语句来选择性地返回 JSX 表达式。</li><li>你可以选择性地将一些 JSX 赋值给变量，然后用大括号将其嵌入到其他 JSX 中。</li><li>在 JSX 中，<code>{cond ? &lt;A /&gt; : &lt;B /&gt;}</code> 表示 <em>“当 <code>cond</code> 为真值时, 渲染 <code>&lt;A /&gt;</code>，否则 <code>&lt;B /&gt;</code>”</em>。</li><li>在 JSX 中，<code>{cond &amp;&amp; &lt;A /&gt;}</code> 表示 <em>“当 <code>cond</code> 为真值时, 渲染 <code>&lt;A /&gt;</code>，否则不进行渲染”</em>。</li><li>快捷的表达式很常见，但如果你更倾向于使用 <code>if</code>，你也可以不使用它们。</li></ul></li><li><p><strong>响应事件</strong></p><ul><li>你可以通过将函数作为 prop 传递给元素如 <code>&lt;button&gt;</code> 来处理事件。</li><li>必须传递事件处理函数，<strong>而非函数调用！</strong> <code>onClick={handleClick}</code> ，不是 <code>onClick={handleClick()}</code>。</li><li>你可以单独或者内联定义事件处理函数。</li><li>事件处理函数在组件内部定义，所以它们可以访问 props。</li><li>你可以在父组件中定义一个事件处理函数，并将其作为 prop 传递给子组件。</li><li>你可以根据特定于应用程序的名称定义事件处理函数的 prop。</li><li>事件会向上传播。通过事件的第一个参数调用 <code>e.stopPropagation()</code> 来防止这种情况。</li><li>事件可能具有不需要的浏览器默认行为。调用 <code>e.preventDefault()</code> 来阻止这种情况。</li><li>从子组件显式调用事件处理函数 prop 是事件传播的另一种优秀替代方案。</li></ul></li><li><p><strong>State</strong></p><ul><li>当一个组件需要在多次渲染间“记住”某些信息时使用 state 变量。</li><li>State 变量是通过调用 <code>useState</code> Hook 来声明的。</li><li>Hook 是以 <code>use</code> 开头的特殊函数。它们能让你 “hook” 到像 state 这样的 React 特性中。</li><li>State 是组件私有的。如果你在两个地方渲染它，则每个副本都有独属于自己的 state。</li><li>在一个 React 应用中一次屏幕更新都会发生以下三个步骤：<ol><li>触发</li><li>渲染</li><li>提交</li></ol></li><li>设置 state 请求一次新的渲染。当你调用 <code>useState</code> 时，React 会为你提供<strong>该次渲染</strong> 的一张 state 快照。每个渲染（以及其中的函数）始终“看到”的是 React 提供给<strong>这个</strong> 渲染的 state 快照。</li><li>React 会在事件处理函数执行完成之后处理 state 更新。这被称为批处理。</li><li>要在一个事件中多次更新某些 state，你可以使用 <code>setNumber(n =&gt; n + 1)</code> 更新函数。</li><li>将 React 中所有的 state 都视为不可直接修改的。不要直接修改一个对象，而要为它创建一个 <strong>新</strong> 版本，并通过把 state 设置成这个新版本来触发重新渲染。想要减少重复的拷贝代码，可以使用 Immer。</li><li>更新数组的技巧</li><li></li></ul></li></ul><p>​</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>开发技术</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>前端</tag>
+      
+      <tag>Web开发</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Transformer</title>
+    <link href="/2025/12/14/Transformer/"/>
+    <url>/2025/12/14/Transformer/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    <categories>
+      
+      <category>人工智能</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>LLM</tag>
+      
+      <tag>NLP</tag>
+      
+      <tag>Transformer</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>ASD儿童干预论文阅读（二）</title>
     <link href="/2025/11/27/ASD%E5%84%BF%E7%AB%A5%E5%B9%B2%E9%A2%84%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%EF%BC%88%E4%BA%8C%EF%BC%89/"/>
     <url>/2025/11/27/ASD%E5%84%BF%E7%AB%A5%E5%B9%B2%E9%A2%84%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
@@ -35,6 +91,33 @@
   
   
   <entry>
+    <title>ASD儿童干预论文阅读（三）</title>
+    <link href="/2025/10/31/ASD%E5%84%BF%E7%AB%A5%E5%B9%B2%E9%A2%84%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%EF%BC%88%E4%B8%89%EF%BC%89/"/>
+    <url>/2025/10/31/ASD%E5%84%BF%E7%AB%A5%E5%B9%B2%E9%A2%84%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%EF%BC%88%E4%B8%89%EF%BC%89/</url>
+    
+    <content type="html"><![CDATA[<table><thead><tr><th>标题</th><th>主题</th><th>提炼</th></tr></thead><tbody><tr><td>Caring for Children With Autism Spectrum Disorder, Part I: Prevalence, Etiology, and Core Features</td><td>分类、病因</td><td>ASD 可能是由多种因素引起的，包括遗传易感性和环境影响。治疗以药物治疗和心理辅导结合。所有 ASD 都具有三个定义特征：社交障碍、言语和非言语交流受限以及存在限制性和重复性行为和/或兴趣。ASD包括多种类型：经典自闭症（典型自闭症）、阿斯伯格综合征**（社交困难与兴趣狭窄，但语言和智力水平正常或超常（如机械记忆能力突出））**、儿童期崩解症以及待分类的广泛性发育障碍（PDD-NOS）</td></tr><tr><td>Parents’ Involvement in ASD Treatment: What Is Their Role?</td><td>父母的介入和情况的监控</td><td>亲社会行为疗法（PRT）：家长学习如何给予孩子清晰、不间断的指导；允许孩子选择活动或玩具；整合各种习得和维持任务；使用与孩子反应相关的自然强化物立即奖励适当的行为；以及奖励孩子在任务中的任何明确尝试或成功。 家长的干预效果在接受治疗师的指导后往往更有效。</td></tr><tr><td>Perception and Acoustic Features of Speech of Children with Autism Spectrum Disorders</td><td>ASD儿童的语音特征</td><td>正常人对于ASD儿童的语音辨识度明显低于正常儿童 ASD儿童在语音语调、高音会有所不同，不停重复某个词是正常现象</td></tr><tr><td>Temperament and Sensory Features of Children with Autism</td><td>ASD儿童的气质（行为特征）</td><td>自闭症儿童更内向、适应能力更差适应能力更差，坚持性更差，反应强度更低，对环境刺激的敏感性更低，积极情绪更低，消极情绪更高，注意力及行为控制能力更差，自我调节能力较差。 自闭症儿童异常感觉处理（视觉迷恋；听觉敏感） 高反应性、低反应性和感觉寻求。高反应性指的是表现出夸张的反应，导致对某些感觉刺激的回避或厌恶，而这些刺激通常不会被正常发育个体视为难以承受或具有威胁性（例如，捂住耳朵表示厌恶声音）。低反应性可能表现为缺乏行为反应或对感觉刺激反应迟钝（例如，忽略呼唤名字、对疼痛耐受力高）。感觉寻求行为是指儿童参与看似能提供强烈感觉输入的活动，表现为对特定刺激持续的兴趣和投入。 自闭症谱系障碍（ASD）中基于神经系统的刺激-奖赏系统差异可能在破坏支持趋近新感官刺激、产生积极情绪和增加探索行为的动机过程方面发挥核心作用</td></tr><tr><td>Sensory abnormalities in children with autism spectrum disorder</td><td>自闭症谱系障碍的感觉异常：干预措施</td><td>在感觉干预领域，感觉统合疗法（以儿童为中心）和感觉基础干预（以成人为主导）有所区别。 前者是在诊所进行的干预，通过游戏活动和感觉增强互动来改善儿童对感觉体验的适应性反应。这些干预通过激活前庭和<a href="https://www.sciencedirect.com/topics/neuroscience/somatosensory-system">躯体感觉系统的</a>粗大运动活动，旨在增强儿童整合感觉信息的能力，从而引导他们养成更有条理、更具适应性的行为，包括改善共同注意力、社交技能、运动计划能力和感知技能。在此过程中，治疗师会根据儿童正在发展的技能水平，选择一个“恰到好处的挑战”（<em>即</em>略高于儿童目前能够轻松完成的活动），并支持他们应对挑战的适应性反应。 相反，感觉统合干预是在课堂上进行的，使用单一感觉策略（例如治疗球或加重背心）来影响唤醒状态，其主要目的是降低高唤醒状态，这种状态在临床上可能表现为躁动不安、多动和自我刺激行为 感觉统合更有效</td></tr></tbody></table>]]></content>
+    
+    
+    <categories>
+      
+      <category>ASD儿童干预</category>
+      
+      <category>调研</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Medical</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>ASD儿童干预论文阅读（一）</title>
     <link href="/2025/10/11/ASD%E5%84%BF%E7%AB%A5%E5%B9%B2%E9%A2%84%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%EF%BC%88%E4%B8%80%EF%BC%89/"/>
     <url>/2025/10/11/ASD%E5%84%BF%E7%AB%A5%E5%B9%B2%E9%A2%84%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%EF%BC%88%E4%B8%80%EF%BC%89/</url>
@@ -46,7 +129,7 @@
       
       <category>ASD儿童干预</category>
       
-      <category>论文阅读</category>
+      <category>调研</category>
       
     </categories>
     
