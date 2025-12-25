@@ -21,13 +21,13 @@
   
     <meta name="description" content="React Let’s start 方法一：使用官方推荐工具（最快） 1. 使用 Vite（推荐） 12345678910111213141516171819# 使用 npmnpm create vite@latest my-react-app -- --template react# 或使用 yarnyarn create vite my-react-app --template react#">
 <meta property="og:type" content="article">
-<meta property="og:title" content="React">
+<meta property="og:title" content="React框架">
 <meta property="og:url" content="http://example.com/2025/12/15/React/index.html">
 <meta property="og:site_name" content="自渡 × 稊园">
 <meta property="og:description" content="React Let’s start 方法一：使用官方推荐工具（最快） 1. 使用 Vite（推荐） 12345678910111213141516171819# 使用 npmnpm create vite@latest my-react-app -- --template react# 或使用 yarnyarn create vite my-react-app --template react#">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-12-15T11:47:20.000Z">
-<meta property="article:modified_time" content="2025-12-21T12:39:10.779Z">
+<meta property="article:modified_time" content="2025-12-24T12:34:10.668Z">
 <meta property="article:author" content="Jeremy Cheng">
 <meta property="article:tag" content="Web开发">
 <meta property="article:tag" content="前端">
@@ -37,7 +37,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>React - 自渡 × 稊园</title>
+  <title>React框架 - 自渡 × 稊园</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -218,7 +218,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="React"></span>
+            <span id="subtitle" data-typed-text="React框架"></span>
           
         </div>
 
@@ -241,7 +241,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.5k 字
+          2.2k 字
         
       </span>
     
@@ -252,7 +252,7 @@
         
         
         
-          13 分钟
+          19 分钟
         
       </span>
     
@@ -298,7 +298,7 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">React</h1>
+            <h1 id="seo-header">React框架</h1>
             
             
               <div class="markdown-body">
@@ -419,7 +419,66 @@
 <li>要在一个事件中多次更新某些 state，你可以使用 <code>setNumber(n =&gt; n + 1)</code> 更新函数。</li>
 <li>将 React 中所有的 state 都视为不可直接修改的。不要直接修改一个对象，而要为它创建一个 <strong>新</strong> 版本，并通过把 state 设置成这个新版本来触发重新渲染。想要减少重复的拷贝代码，可以使用 Immer。</li>
 <li>更新数组的技巧</li>
-<li></li>
+</ul>
+</li>
+<li>
+<p><strong>状态管理</strong></p>
+<ul>
+<li>声明式UI：声明式编程意味着为每个视图状态声明 UI 而非细致地控制 UI（命令式）。</li>
+<li>state结构的选择：合并，减少出错更新，避免冗余和重复，扁平的state避免嵌套等等。</li>
+<li>组件间共享状态：props，state</li>
+<li>只要在相同位置渲染的是相同组件， React 就会保留状态。</li>
+<li>state 不会被保存在 JSX 标签里。它与你在树中放置该 JSX 的位置相关联。</li>
+<li>你可以通过为一个子树指定一个不同的 key 来重置它的 state。</li>
+<li>不要嵌套组件的定义，否则你会意外地导致 state 被重置。</li>
+<li>把 <code>useState</code> 转化为 <code>useReducer</code>：
+<ol>
+<li>通过事件处理函数 dispatch actions；</li>
+<li>编写一个 reducer 函数，它接受传入的 state 和一个 action，并返回一个新的 state；</li>
+<li>使用 <code>useReducer</code> 替换 <code>useState</code></li>
+</ol>
+</li>
+<li>Context 使组件向其下方的整个树提供信息。</li>
+<li>传递 Context 的方法:
+<ol>
+<li>通过 <code>export const MyContext = createContext(defaultValue)</code> 创建并导出 context。</li>
+<li>在无论层级多深的任何子组件中，把 context 传递给 <code>useContext(MyContext)</code> Hook 来读取它。</li>
+<li>在父组件中把 children 包在 <code>&lt;MyContext value={...}&gt;</code> 中来提供 context。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>脱围机制</strong></p>
+<ul>
+<li><strong>ref</strong>
+<ul>
+<li>与 state 不同，设置 ref 的 <code>current</code> 值不会触发重新渲染。</li>
+<li>不要在渲染过程中读取或写入 <code>ref.current</code>。这使你的组件难以预测。</li>
+<li>你通过传递 <code>&lt;div ref={myRef}&gt;</code> 指示 React 将 DOM 节点放入 <code>myRef.current</code>。</li>
+<li>通常，你会将 refs 用于非破坏性操作，例如聚焦、滚动或测量 DOM 元素。</li>
+</ul>
+</li>
+<li><strong>Effect</strong>
+<ul>
+<li>与事件不同，Effect 由渲染本身引起，而非特定的交互。</li>
+<li>默认情况下，Effect 在每次渲染（包括初始渲染）后运行。</li>
+<li>如果所有依赖项都与上一次渲染时相同，React 会跳过本次 Effect。</li>
+<li>空的依赖数组（<code>[]</code>）对应于组件的“挂载”，即组件被添加到页面上时。</li>
+<li>清理函数：如果你的 Effect 因为重新挂载而出现问题，那么你需要实现一个清理函数。React 会在 Effect 再次运行之前和在组件卸载时调用你的清理函数。</li>
+<li>不需要Effect的诸多情况</li>
+<li>在编写和读取 Effect 时，要独立地考虑每个 Effect（如何开始和停止同步），而不是从组件的角度思考（如何挂载、更新或卸载）。</li>
+<li>检查工具验证在 Effect 内部使用的所有响应式值都被指定为依赖项。</li>
+<li>事件处理函数和Effect的区别：响应式vs非响应式</li>
+<li>你可以将非响应式逻辑从 Effect 移到 Effect Event 中。</li>
+<li>只在 Effect 内部调用 Effect Event。</li>
+<li>如果 Effect 的不同部分因不同原因需要重新运行，请将其拆分为多个 Effect。</li>
+<li>如果你想读取最新值而不“反应”它，请从 Effect 中提取出一个 Effect Event。</li>
+<li>自定义 Hook 让你可以在组件间共享逻辑。</li>
+<li>自定义 Hook 命名必须以 <code>use</code> 开头，后面跟一个大写字母。</li>
+<li>自定义 Hook 共享的只是状态逻辑，不是状态本身</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -471,7 +530,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>React</div>
+      <div>React框架</div>
       <div>http://example.com/2025/12/15/React/</div>
     </div>
     <div class="license-meta">
@@ -515,6 +574,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2025/12/24/%E4%BB%80%E4%B9%88%E6%98%AFLangchain/" title="什么是Langchain">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">什么是Langchain</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
