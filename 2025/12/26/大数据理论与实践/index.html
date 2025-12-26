@@ -1,0 +1,1448 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.jpg">
+  <link rel="icon" href="/img/avatar.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Jeremy Cheng">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="《大数据理论与实践 Ⅰ》 1. 大数据综述与发展脉络 1.1 关键知识点  大数据 4V  Volume：数据规模巨大，导致单机存储与计算不可行，系统设计优先考虑水平扩展与容错。 Variety：数据类型多样（结构化、半结构化、非结构化并存），要求存储与计算框架具备多格式接入与统一处理抽象。 Velocity：生成与处理速度快，要求高吞吐与（按场景）低延迟处理能力，并强调流批协同。 Value：价">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大数据理论与实践">
+<meta property="og:url" content="http://example.com/2025/12/26/%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5/index.html">
+<meta property="og:site_name" content="自渡 × 稊园">
+<meta property="og:description" content="《大数据理论与实践 Ⅰ》 1. 大数据综述与发展脉络 1.1 关键知识点  大数据 4V  Volume：数据规模巨大，导致单机存储与计算不可行，系统设计优先考虑水平扩展与容错。 Variety：数据类型多样（结构化、半结构化、非结构化并存），要求存储与计算框架具备多格式接入与统一处理抽象。 Velocity：生成与处理速度快，要求高吞吐与（按场景）低延迟处理能力，并强调流批协同。 Value：价">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-12-26T09:32:51.000Z">
+<meta property="article:modified_time" content="2025-12-26T09:34:01.682Z">
+<meta property="article:author" content="Jeremy Cheng">
+<meta property="article:tag" content="Big Data">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>大数据理论与实践 - 自渡 × 稊园</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"VuFNqHSWzChINkJFPCBgzzAA-gzGzoHsz","app_key":"CiPa7Le2LyTY1FdufKsHqM1z","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>JeremyIrving的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="大数据理论与实践"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-12-26 17:32" pubdate>
+          2025年12月26日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          60 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">大数据理论与实践</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1>《大数据理论与实践 Ⅰ》</h1>
+<h2 id="1-大数据综述与发展脉络">1. 大数据综述与发展脉络</h2>
+<h3 id="1-1-关键知识点">1.1 关键知识点</h3>
+<ul>
+<li><strong>大数据 4V</strong>
+<ul>
+<li><strong>Volume</strong>：数据规模巨大，导致单机存储与计算不可行，系统设计优先考虑<strong>水平扩展</strong>与<strong>容错</strong>。</li>
+<li><strong>Variety</strong>：数据类型多样（结构化、半结构化、非结构化并存），要求存储与计算框架具备<strong>多格式接入</strong>与<strong>统一处理抽象</strong>。</li>
+<li><strong>Velocity</strong>：生成与处理速度快，要求<strong>高吞吐</strong>与（按场景）<strong>低延迟</strong>处理能力，并强调<strong>流批协同</strong>。</li>
+<li><strong>Value</strong>：价值密度低，价值获取依赖统计、建模与特征抽取等“提纯”过程。</li>
+</ul>
+</li>
+<li><strong>Google 三大奠基论文</strong>：存储 / 计算 / 服务的分工
+<ul>
+<li><strong>GFS</strong>：面向海量数据的<strong>分布式存储</strong>（大文件、顺序读写、容错优先）。</li>
+<li><strong>MapReduce</strong>：面向海量数据的<strong>离线批处理计算模型</strong>（以 Map 与 Reduce 抽象并行与容错）。</li>
+<li><strong>Bigtable</strong>：面向大规模结构化数据的<strong>在线服务存储</strong>（列族数据模型，强调高吞吐与可扩展）。</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2-考点说明">1.2 考点说明</h3>
+<ul>
+<li>答题框架：用 “<strong>4V → 系统需求 → 典型组件</strong>” 组织表述
+<ul>
+<li>4V 给出定义后，补一句“带来的系统约束”，例如 Volume 对应分布式扩展，Velocity 对应吞吐与延迟权衡。</li>
+<li>将约束落到生态视角：存储系统（如 <strong>HDFS</strong>）+ 计算框架（如 <strong>MapReduce / Spark</strong>）+ 协调服务（如 <strong>ZooKeeper</strong>）构成工程闭环。</li>
+</ul>
+</li>
+<li>选择题排除干扰项：优先锁定 “<strong>论文级概念</strong>” 与 “<strong>开源实现</strong>”
+<ul>
+<li>GFS / MapReduce / Bigtable 属于 Google 三大论文；HDFS 属于开源实现，不应被选为 “Google 三大论文”。</li>
+<li>关键区别：论文描述的是设计思想与系统模型；题干出现具体开源组件名时，通常不是论文原名。</li>
+</ul>
+</li>
+<li>高频表达：<strong>吞吐优先</strong>与<strong>顺序 I/O</strong>
+<ul>
+<li>大数据底座系统常优先优化顺序读写吞吐与故障容忍，而不是单次随机访问的低延迟。</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-3-思考题">1.3 思考题</h3>
+<ul>
+<li>如果一个业务每天产生 TB 级日志，要求 T+1 产出统计报表：你会如何用 “4V” 解释其系统选型倾向？</li>
+<li>在 “存储 / 计算 / 服务” 三类能力中，分别举一个你认为最关键的设计目标，并说明原因。</li>
+<li>设想要保证同一类用户行为事件按时间顺序处理：你会优先从数据建模（字段与 key）、还是从系统组件（存储/计算）入手？为什么？</li>
+<li>为什么说 Value（价值密度低）会倒逼系统强调 “批处理 + 统计建模”？结合一个你熟悉的场景说明。</li>
+</ul>
+<hr>
+<h2 id="2-分布式协调与一致性基础">2. 分布式协调与一致性基础</h2>
+<h3 id="2-1-关键知识点">2.1 关键知识点</h3>
+<ul>
+<li><strong>ZooKeeper 的定位</strong>：<strong>分布式协调服务</strong>
+<ul>
+<li>解决的问题：在分布式系统中提供“少量关键元数据”的一致性存储与变更通知，支撑<strong>选主</strong>、<strong>成员管理</strong>、<strong>配置分发</strong>与<strong>分布式锁</strong>等协调能力。</li>
+<li>不擅长的事情：存储大量业务数据或高吞吐写入（其设计目标不是数据仓库或消息系统）。</li>
+</ul>
+</li>
+<li><strong>数据模型</strong>：ZNode 目录树与节点语义
+<ul>
+<li><strong>ZNode</strong> 是类文件系统的层级节点，可存放少量数据与 ACL，并维护版本号等元信息。</li>
+<li>常见节点类型：
+<ul>
+<li><strong>持久节点</strong>：显式删除前一直存在，适合配置、服务目录等长期元信息。</li>
+<li><strong>临时节点</strong>：与 <strong>Session</strong> 绑定，Session 失效后自动删除，适合存活探测与主从心跳。</li>
+<li><strong>顺序节点</strong>：创建时自动追加单调递增序号，适合分布式锁排队与全序编号。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>集群角色与写入路径</strong>：Leader / Follower / Observer
+<ul>
+<li><strong>Leader</strong> 负责事务请求的提案与提交；<strong>Follower</strong> 参与多数派确认并对客户端提供读服务；<strong>Observer</strong> 不参与投票，用于扩展读吞吐。</li>
+<li>工程直觉：写入要“过多数派”，读取尽量就近，但读到的状态是否“最新”取决于客户端与服务端的同步语义。</li>
+</ul>
+</li>
+<li><strong>会话（Session）与临时节点的故障语义</strong>
+<ul>
+<li>Session 是客户端与 ZooKeeper 集群的逻辑连接，失效的判定基于<strong>超时</strong>与<strong>心跳</strong>。</li>
+<li>临时节点绑定 Session，使“进程故障/网络断开”的信号能够自动反映到协调元信息上。</li>
+</ul>
+</li>
+<li><strong>Watch 机制</strong>：变更通知的基础抽象
+<ul>
+<li><strong>Watch</strong> 是一次性触发的监听；触发后若需要持续观察必须<strong>重新注册</strong>。</li>
+<li>工程含义：客户端需要处理 “事件丢失/重放/重复触发” 等边界，并以 “读当前状态 + 重新注册 Watch” 形成闭环。</li>
+</ul>
+</li>
+<li><strong>一致性与多数派（Quorum）基本原则</strong>
+<ul>
+<li>写入与选主依赖<strong>多数派仲裁</strong>以避免脑裂；集群规模通常取<strong>奇数</strong>以提高容错与资源利用率。</li>
+<li>核心直觉：用 (2f+1) 台容忍 (f) 台故障；任何两个多数派集合必然有交集，从而保障一致性推进。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-考点说明">2.2 考点说明</h3>
+<ul>
+<li>答题框架：按 “定位 → 核心抽象 → 典型能力 → 生态依赖” 组织
+<ul>
+<li>定位：ZooKeeper 是<strong>协调服务</strong>（不是存储/计算引擎）。</li>
+<li>核心抽象：<strong>Session + ZNode + Watch</strong>。</li>
+<li>典型能力：选主、配置管理、命名服务、分布式锁、成员管理。</li>
+<li>生态依赖：
+<ul>
+<li>HDFS（HA）：ZooKeeper + ZKFC 完成 Active/Standby 的健康检查、选主与自动切换。</li>
+<li>HBase：依赖 ZooKeeper 做 Master/RegionServer 协调与关键元信息定位。</li>
+<li>Kafka：历史上依赖 ZooKeeper 做控制器选举与元数据管理。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>易错点与排除逻辑
+<ul>
+<li>看到 “分布式协调” 关键词优先匹配 ZooKeeper；看到 “数据采集链路组件” 不应默认等价于 ZooKeeper 依赖。</li>
+<li><strong>Flume</strong> 常出现在日志采集链路中，但不是 ZooKeeper 的强依赖项，题目中常作为干扰项出现。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-3-思考题">2.3 思考题</h3>
+<ul>
+<li>如果把 ZooKeeper 当作业务主数据存储，会遇到哪些性能与可用性风险？请从 “数据量、写入频率、Watch 风暴” 三个角度讨论。</li>
+<li>设计一个简单的分布式锁：你会选用哪种 ZNode 组合（临时 / 顺序）？如何处理锁抢占、超时与公平性？</li>
+<li>为什么多数派机制要求集群规模通常取奇数？请用容错与资源利用率解释你的结论。</li>
+<li>在配置中心场景里，Watch 是一次性触发的：客户端如何保证 “收到变更后一定能读到最新配置”？</li>
+</ul>
+<hr>
+<h2 id="3-HDFS-基础机制与读写路径">3. HDFS 基础机制与读写路径</h2>
+<h3 id="3-1-关键知识点">3.1 关键知识点</h3>
+<ul>
+<li><strong>HDFS 架构组件与职责</strong>
+<ul>
+<li><strong>NameNode</strong>（Master）：管理文件系统命名空间（Namespace）与<strong>元数据</strong>（权限、文件到 Block 映射），协调副本策略与集群状态；<strong>不在数据读写路径上传输实际数据</strong>。</li>
+<li><strong>DataNode</strong>（Slave）：存储实际<strong>数据块（Block）<strong>与校验和，执行客户端的读写请求，并周期性向 NameNode 发送</strong>心跳</strong>与<strong>块报告（Block Report）</strong>。</li>
+<li><strong>Client</strong>：与 NameNode 交互获取元数据，与 DataNode 交互传输数据。</li>
+</ul>
+</li>
+<li><strong>数据存储单元：Block 与副本</strong>
+<ul>
+<li>文件被切分为固定大小的 <strong>Block</strong>（默认 128 MiB），最后一个 Block 可小于默认值；默认 <strong>3 副本策略</strong>（机架感知：本地 -&gt; 同机架 -&gt; 跨机架）以平衡容错与带宽。</li>
+<li><strong>存储适用性</strong>：HDFS 设计目标为<strong>高吞吐量的顺序读写</strong>，适合处理大文件；<strong>不适合存储海量小文件</strong>（寻址开销大，且耗尽 NameNode 内存）。</li>
+</ul>
+</li>
+<li><strong>元数据持久化机制</strong>
+<ul>
+<li><strong>FSImage</strong>：文件系统元数据的<strong>静态快照</strong>（包含目录树、权限、文件属性等）。</li>
+<li><strong>EditLog</strong>：记录所有元数据变更操作的<strong>增量日志</strong>。</li>
+<li><strong>内存元数据</strong>：Block 的**位置信息（Location）**不持久化到 FSImage，而是由 DataNode 启动时上报并动态维护在 NameNode 内存中。</li>
+</ul>
+</li>
+<li><strong>安全模式（Safe Mode）</strong>
+<ul>
+<li>启动时的保护状态，<strong>只读不写</strong>；等待 DataNode 上报 Block 信息，直到满足“最小副本率”等阈值后自动退出。</li>
+<li>触发条件：启动时、Block 上报率低于阈值、DataNode 存活数过少、<strong>NameNode 磁盘空间不足</strong>等。</li>
+</ul>
+</li>
+<li><strong>读写流程核心逻辑</strong>
+<ul>
+<li><strong>读</strong>：Client -&gt; NameNode (获取 Block 位置) -&gt; DataNode (就近读取)。</li>
+<li><strong>写</strong>：Client -&gt; NameNode (申请创建) -&gt; DataNode Pipeline (建立流水线写入与复制) -&gt; Ack 确认。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-2-考点说明">3.2 考点说明</h3>
+<ul>
+<li>答题框架：描述 HDFS 读写流程
+<ul>
+<li>核心在于区分“<strong>控制流</strong>”与“<strong>数据流</strong>”：先问 NameNode 拿地址（控制），再找 DataNode 传数据（数据）。</li>
+<li>写入时的 <strong>Pipeline 机制</strong>：Client 将数据包写入第一个 DataNode，该 DataNode 传给第二个，依次类推；Ack 逆序返回，确保强一致性（所有副本写完才算成功，或者满足最小写入数）。</li>
+</ul>
+</li>
+<li>计算题公式：空间占用估算
+<ul>
+<li>公式：<code>HDFS 占用空间 ≈ 文件大小 × 副本数</code>。</li>
+<li>陷阱：Block 大小（如 128 MiB）<strong>不影响</strong>总空间占用，只影响 Block 的数量；10 MiB 文件存 3 副本就是 30 MiB，不会占用 3 个 128 MiB 空间。</li>
+</ul>
+</li>
+<li>易错点与排除逻辑
+<ul>
+<li><strong>元数据位置</strong>：Block 位置信息来自 DataNode 汇报，<strong>不存 FSImage</strong>；题干说“FSImage 包含所有 Block 位置”通常是错的。</li>
+<li><strong>客户端行为</strong>：Client 写入时是“边切分边通过 Pipeline 上传”，不是“本地切好所有块再并行传”。</li>
+<li><strong>Checkpoint</strong>：HDFS 2.x HA 架构下，由 <strong>Standby NameNode</strong> 负责 Checkpoint（合并 EditLog 到 FSImage），取代了 1.x 的 SecondaryNameNode。</li>
+<li><strong>小文件问题</strong>：大量小文件会<strong>耗尽 NameNode 内存</strong>（因为每个文件/Block 都要占元数据对象），限制了集群扩展性。</li>
+<li><strong>HDFS 3.x 新特性</strong>：引入**纠删码（Erasure Coding）**以在保证容错的前提下降低存储成本（相比 3 副本策略）。</li>
+</ul>
+</li>
+<li>常用命令（用于理解题干）
+<ul>
+<li><code>hdfs dfsadmin -safemode get</code>：查看安全模式状态。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-3-思考题">3.3 思考题</h3>
+<ul>
+<li>为什么 HDFS 不适合存储数十亿个 KB 级别的小文件？请从 NameNode 内存瓶颈与元数据开销角度分析。</li>
+<li>默认 Block 大小设置为 128 MiB（甚至更大）而不是 4 KB，背后的核心权衡是什么？（提示：寻址时间 vs 传输时间）。</li>
+<li>在写入 Pipeline 中，如果中间某个 DataNode 挂了，HDFS 会如何处理？（提示：Pipeline 恢复与副本补全）。</li>
+</ul>
+<hr>
+<h2 id="4-HDFS-高可用（HA）与扩展能力">4. HDFS 高可用（HA）与扩展能力</h2>
+<h3 id="4-1-关键知识点">4.1 关键知识点</h3>
+<ul>
+<li><strong>HDFS Federation（联邦）</strong>
+<ul>
+<li>解决问题：单 NameNode 内存受限（扩展性瓶颈），无法存储海量文件元数据。</li>
+<li>架构特点：<strong>多个 NameNode</strong> 独立管理不同的命名空间（Namespace），互不干扰；DataNode 被所有 NameNode <strong>共享</strong>，物理存储不隔离，逻辑上通过**块池（Block Pool）**划分。</li>
+</ul>
+</li>
+<li><strong>HDFS HA（High Availability）</strong>
+<ul>
+<li>解决问题：单 NameNode <strong>单点故障（SPOF）</strong>，保证服务高可用。</li>
+<li>架构核心：同一命名空间由两个 NameNode（<strong>Active/Standby</strong>）管理；Active 对外服务，Standby 热备。</li>
+<li>关键组件与职责：
+<ul>
+<li><strong>Active NameNode</strong>：处理所有客户端请求。</li>
+<li><strong>Standby NameNode</strong>：同步 EditLog，定期 Checkpoint，时刻准备接管。</li>
+<li><strong>QJM</strong>（Quorum Journal Manager）：基于 Paxos 算法管理<strong>共享 Edits 存储</strong>，只有多数派（2N+1）写入成功才算提交，防止<strong>脑裂</strong>。</li>
+<li><strong>ZKFC</strong>（ZooKeeper Failover Controller）：与 NameNode 同机部署，监控进程健康，向 ZooKeeper 抢占锁。</li>
+<li><strong>ZooKeeper</strong>：提供分布式锁与选主协调服务。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-2-考点说明">4.2 考点说明</h3>
+<ul>
+<li>简答题模板：Active 宕机后如何实现自动切换
+<ol>
+<li><strong>故障检测</strong>：Active NameNode 所在机器的 <strong>ZKFC</strong> 检测到进程异常（或机器宕机导致 ZK 会话丢失）。</li>
+<li><strong>选主竞争</strong>：Standby NameNode 的 ZKFC 监测到锁被释放，尝试在 ZooKeeper 创建临时节点（<strong>抢锁</strong>）。</li>
+<li><strong>隔离（Fencing）</strong>：成功抢锁的 ZKFC 负责“<strong>补刀</strong>”，通过 SSH 或 RPC 强制杀掉旧 Active 进程，确保其不再通过 QJM 写入数据（防止<strong>双写/脑裂</strong>）。</li>
+<li><strong>状态切换</strong>：新 Active 从 QJM 同步所有未读取的 EditLog，提升状态为 Active，开始对外提供服务。</li>
+</ol>
+</li>
+<li>易错点与排除逻辑
+<ul>
+<li><strong>部署架构</strong>：ZKFC 是“每个 NameNode 节点一套”，不是集群共用一个。</li>
+<li><strong>JournalNode 数量</strong>：必须部署<strong>奇数个</strong>（至少 3 个），遵循多数派原则（写成功 &gt; N/2）。</li>
+<li>概念混淆：Federation 扩容命名空间（多对多），HA 容错命名空间（一对一）；Federation 不是 HA。</li>
+<li><strong>元数据位置</strong>：Block 位置信息（Location）不持久化到 FSImage，只在内存维护。</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-3-思考题">4.3 思考题</h3>
+<ul>
+<li>为什么 HDFS HA 中需要 JournalNode 集群而不是简单的 NFS 共享存储？（提示：脑裂保护与一致性保证）</li>
+<li>如果 ZKFC 进程挂了但 NameNode 进程正常，会发生什么？（提示：ZK 锁丢失 -&gt; 触发不必要的切换 -&gt; 也就是假死）</li>
+</ul>
+<hr>
+<h2 id="5-MapReduce-编程模型与-Shuffle">5. MapReduce 编程模型与 Shuffle</h2>
+<h3 id="5-1-关键知识点">5.1 关键知识点</h3>
+<ul>
+<li>MapReduce 编程模型
+<ul>
+<li>执行阶段：<strong>InputSplit</strong> -&gt; <strong>Map</strong> -&gt; <strong>Shuffle</strong> -&gt; <strong>Reduce</strong> -&gt; <strong>Output</strong>。
+<ul>
+<li><strong>注意</strong>：标准描述中 MapReduce 分为 <strong>Map 阶段</strong> 和 <strong>Reduce 阶段</strong>；<strong>Shuffle</strong> 是连接二者的中间过程。题目若称“分为 split, map, shuffle, reduce 四阶段缺一不可”通常判错，因为 <strong>Split</strong> 是输入处理，<strong>Shuffle</strong> 是过程而非独立计算阶段。</li>
+</ul>
+</li>
+<li><strong>InputSplit（切片）</strong>：数据的逻辑切分，决定 <strong>MapTask</strong> 的并行度（个数）；通常大小接近 HDFS Block，但概念不同（计算 vs 存储）。</li>
+<li><strong>Shuffle（洗牌）</strong>：连接 Map 与 Reduce 的桥梁，包含分区（<strong>Partition</strong>）、排序（<strong>Sort</strong>）、溢写（<strong>Spill</strong>）、归并（<strong>Merge</strong>）、拷贝（<strong>Copy</strong>）与分组（<strong>Group</strong>）等步骤。</li>
+<li><strong>Reduce</strong>：对相同 key 的 value 列表进行聚合处理。</li>
+</ul>
+</li>
+<li>适用场景
+<ul>
+<li>适用：<strong>离线批处理</strong>、<strong>ETL</strong>、日志分析、倒排索引构建（<strong>高吞吐</strong>）。</li>
+<li>不适用：<strong>低延迟流式计算</strong>（实时性要求高）。</li>
+</ul>
+</li>
+<li>优化与定制
+<ul>
+<li><strong>Combiner</strong>：Map 端本地预聚合，减少网络传输；默认不开启，需满足交换律/结合律。</li>
+<li><strong>Partitioner</strong>：决定数据分发到哪个 Reducer；默认 <code>hash(key) % numReducers</code>；自定义分区可缓解数据倾斜。</li>
+<li><strong>Custom Key</strong>：自定义 Key 需实现 <code>WritableComparable</code> 接口，定义序列化与比较规则（<strong>compareTo</strong>）。</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-2-考点说明">5.2 考点说明</h3>
+<ul>
+<li>简答题模板：描述 MapReduce 编程模型
+<ol>
+<li><strong>输入切分</strong>：<strong>InputFormat</strong> 将数据切分为多个 <strong>InputSplit</strong>，每个切片启动一个 <strong>MapTask</strong>。</li>
+<li><strong>Map 阶段</strong>：<strong>MapTask</strong> 解析输入，对每条记录执行 <code>map()</code> 函数，输出中间键值对。</li>
+<li><strong>Shuffle 阶段</strong>：中间结果经分区、排序、溢写与归并，通过<strong>网络传输</strong>到对应的 <strong>ReduceTask</strong>。</li>
+<li><strong>Reduce 阶段</strong>：<strong>ReduceTask</strong> 对按 key 分组的数据执行 <code>reduce()</code> 函数，输出最终结果到 HDFS。</li>
+</ol>
+</li>
+<li>易错点与核心结论
+<ul>
+<li><strong>MapTask 并行度</strong>：由 <strong>InputSplit 个数</strong>决定，不是简单的“文件大小/Block 大小”。</li>
+<li><strong>性能瓶颈</strong>：<strong>Shuffle 阶段</strong>最耗时，涉及大量<strong>磁盘 I/O</strong>、<strong>网络传输</strong>与<strong>序列化/反序列化</strong>。</li>
+<li><strong>Combiner 误区</strong>：Combiner 是“<strong>可选优化</strong>”而非“必须步骤”；不能改变最终业务逻辑（如求平均值不能直接用）。</li>
+<li><strong>分区目的</strong>：Partitioner 的核心目标是“<strong>将相同 key 汇聚到同一 Reducer</strong>”，而非单纯的负载均衡。</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-3-思考题">5.3 思考题</h3>
+<ul>
+<li>为什么 Shuffle 被称为 MapReduce 的“心脏”，同时也是性能瓶颈所在？（提示：网络带宽与磁盘 I/O）</li>
+<li>如果 MapReduce 任务出现数据倾斜（某一个 Reduce 处理数据量极大），可能的原因是什么？如何利用 Partitioner 解决？</li>
+</ul>
+<hr>
+<h2 id="6-YARN-资源管理与调度">6. YARN 资源管理与调度</h2>
+<h3 id="6-1-关键知识点">6.1 关键知识点</h3>
+<ul>
+<li><strong>架构演进</strong>（MRv1 -&gt; YARN/MRv2）
+<ul>
+<li>MRv1 痛点：JobTracker 单点瓶颈（资源管理 + 任务调度耦合），扩展性差，不支持非 MR 任务。</li>
+<li><strong>YARN 核心</strong>：将**资源管理（RM）<strong>与</strong>任务调度（AM）**解耦；RM 全局管理，AM 应用级管理。</li>
+<li>目标：支持多种计算框架（Spark, Flink, MR）在同一集群共享资源。</li>
+</ul>
+</li>
+<li><strong>核心组件与职责</strong>
+<ul>
+<li><strong>ResourceManager (RM)</strong>：<strong>全局资源管理器</strong>，负责整个集群的资源分配与调度（处理 Client 请求，监控 NM）。</li>
+<li><strong>NodeManager (NM)</strong>：<strong>单节点代理</strong>，管理容器生命周期，汇报资源使用情况。</li>
+<li><strong>ApplicationMaster (AM)</strong>：<strong>每个应用一个</strong>，负责向 RM 申请资源，与 NM 交互启动/停止 Container，监控任务运行。</li>
+<li><strong>Container</strong>：<strong>资源抽象单位</strong>（CPU, Memory），封装运行环境；<strong>注意</strong>：Container 不负责 HDFS 数据存储。</li>
+</ul>
+</li>
+<li><strong>调度器（Scheduler）</strong>
+<ul>
+<li><strong>FIFO</strong>：先进先出，简单但不支持多租户/优先级。</li>
+<li><strong>Capacity</strong>：多队列，预留容量，适合多租户共享且需保证各组织最小资源。</li>
+<li><strong>Fair</strong>：公平共享，动态调整，资源空闲时可被其他队列借用。</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-2-考点说明">6.2 考点说明</h3>
+<ul>
+<li>易错点与辨析
+<ul>
+<li><strong>组件职责误区</strong>：RM 负责“集群级”资源分配，<strong>不负责</strong>具体作业内部的任务监控与容错（这是 AM 的活）。</li>
+<li><strong>Container 定义</strong>：Container 是“计算资源 + 环境”的封装，不要将其与 HDFS 的 Block（存储）混淆。</li>
+<li><strong>调度器选择</strong>：多选题常考“YARN 支持哪些调度器”，上述三种（FIFO, Capacity, Fair）通常都是正确选项。</li>
+</ul>
+</li>
+<li><strong>核心机制：RM 高可用（HA）</strong>
+<ul>
+<li>架构：Active/Standby RM，通过 ZKFC 选主，状态数据持久化到 ZooKeeper/FileSystem。</li>
+<li>故障转移：Active 挂掉后，Standby 自动接管，Client 重试连接新 Active。</li>
+</ul>
+</li>
+<li><strong>YARN 容错机制</strong>
+<ul>
+<li><strong>Task 失败</strong>：AM 会重试（默认 4 次）。</li>
+<li><strong>NodeManager 失败</strong>：RM 检测心跳超时，将其上 Container 标记失败，由 AM 重新申请资源运行。</li>
+<li><strong>ApplicationMaster 失败</strong>：RM 重启 AM（保留已完成 Task 的状态需依赖 Log Aggregation 和 AM 具体实现）。</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-3-思考题">6.3 思考题</h3>
+<ul>
+<li>为什么说 YARN 的架构比 MRv1 的 JobTracker 更具扩展性？（提示：解耦带来的减负）</li>
+<li>如果一个 MapReduce 任务的 ApplicationMaster 挂了，整个任务会失败吗？YARN 是如何处理的？</li>
+</ul>
+<hr>
+<h2 id="7-Spark-核心抽象与执行机制">7. Spark 核心抽象与执行机制</h2>
+<h3 id="7-1-关键知识点">7.1 关键知识点</h3>
+<ul>
+<li><strong>Spark 技术栈</strong>
+<ul>
+<li><strong>Spark Core</strong>：基础引擎，负责任务调度、内存管理、故障恢复、存储系统交互。</li>
+<li><strong>Spark SQL</strong>：结构化数据处理，操作 <strong>DataFrame/Dataset</strong>（非 RDD），兼容 Hive。</li>
+<li><strong>Spark Streaming</strong>：微批处理（Micro-batch），将实时流拆分为小批次处理（高吞吐，但延迟高于 Flink）。</li>
+<li><strong>MLlib &amp; GraphX</strong>：机器学习与图计算库；<strong>注意</strong>：GraphX 是图计算框架，不是图数据库。</li>
+</ul>
+</li>
+<li><strong>核心抽象：RDD vs DataFrame vs Dataset</strong>
+<ul>
+<li><strong>RDD</strong>：弹性分布式数据集，底层对象，强类型，不可变，<strong>Lazy 执行</strong>。</li>
+<li><strong>DataFrame</strong>：RDD + Schema（类似 Table），弱类型，<strong>Catalyst 优化器</strong>可优化执行计划。</li>
+<li><strong>Dataset</strong>：DataFrame + <strong>Type Safety</strong>（强类型），兼具 RDD 的类型安全与 DataFrame 的优化。</li>
+<li><strong>结论</strong>：三者可相互转换（<code>.rdd</code>, <code>.toDF()</code>, <code>.as[]</code>）。</li>
+</ul>
+</li>
+<li><strong>持久化与缓存（Caching/Persistence）</strong>
+<ul>
+<li><strong>目的</strong>：避免重复计算，加速迭代算法。</li>
+<li><strong>级别</strong>：<code>MEMORY_ONLY</code>（默认，快但耗内存）、<code>MEMORY_AND_DISK</code>（内存不够溢写磁盘，稳）、<code>DISK_ONLY</code>。</li>
+</ul>
+</li>
+<li><strong>依赖与 Stage</strong>
+<ul>
+<li><strong>窄依赖（Narrow）</strong>：父 RDD 分区只被一个子 RDD 分区使用（One-to-One），可 Pipeline 执行，无 Shuffle。</li>
+<li><strong>宽依赖（Wide）</strong>：父 RDD 分区被多个子 RDD 分区使用（Shuffle），涉及网络传输。</li>
+<li><strong>Stage 划分</strong>：以**宽依赖（Shuffle）**为边界；Shuffle 是性能瓶颈。</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-2-考点说明">7.2 考点说明</h3>
+<ul>
+<li><strong>易错点与辨析</strong>
+<ul>
+<li><strong>性能瓶颈</strong>：<strong>Shuffle 阶段</strong>最耗时（网络 I/O + 磁盘 I/O + 序列化），调优重点。</li>
+<li><strong>RDD 转换</strong>：RDD, DataFrame, Dataset 之间并非隔离，可自由转换；DataSet 在 Scala/Java 中常用，Python 中主要是 DataFrame。</li>
+<li><strong>Stage 切分</strong>：遇到<strong>宽依赖</strong>就切分 Stage，<strong>窄依赖</strong>则合并在同一个 Task 中流水线执行。</li>
+<li><strong>容错成本</strong>：窄依赖只需重算丢失分区（低成本）；宽依赖可能级联重算所有父分区（高成本，通常需 Checkpoint）。</li>
+</ul>
+</li>
+<li><strong>生态兼容</strong>
+<ul>
+<li>Spark 可读取 HDFS, HBase, Hive, Cassandra 等多种数据源；计算与存储解耦。</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-3-思考题">7.3 思考题</h3>
+<ul>
+<li>为什么 Spark 比 MapReduce 快？（提示：内存计算 + DAG 优化 + 线程级 Task）</li>
+<li>宽依赖和窄依赖在容错恢复时有什么区别？为什么宽依赖通常需要 Checkpoint？</li>
+</ul>
+<hr>
+<h2 id="8-Hive-数据仓库与表设计">8. Hive 数据仓库与表设计</h2>
+<h3 id="8-1-关键知识点">8.1 关键知识点</h3>
+<ul>
+<li><strong>Hive 定位</strong>
+<ul>
+<li>基于 HDFS 的数据仓库工具，提供 HiveQL（类 SQL）；将 SQL 转换为 MapReduce/Spark 任务执行。</li>
+<li><strong>元数据（Metadata）</strong>：表名、列、分区等信息存放在 <strong>Metastore</strong>（通常是 MySQL）；<strong>数据（Data）</strong>：存放在 <strong>HDFS</strong>。</li>
+</ul>
+</li>
+<li><strong>内部表 vs 外部表</strong>
+<ul>
+<li><strong>内部表（Managed）</strong>：Hive 管理元数据和数据。<code>DROP TABLE</code> 时，<strong>元数据和 HDFS 数据都被删除</strong>。</li>
+<li><strong>外部表（External）</strong>：Hive 只管理元数据。<code>DROP TABLE</code> 时，<strong>只删元数据，保留 HDFS 数据</strong>。适用多工具共享数据。</li>
+</ul>
+</li>
+<li><strong>存储格式</strong>
+<ul>
+<li><strong>TextFile</strong>：行式存储，文本格式，占用空间大，解析慢。</li>
+<li><strong>ORC / Parquet</strong>：<strong>列式存储</strong>，压缩比高，支持切分，适合 OLAP 查询（只读特定列）。</li>
+</ul>
+</li>
+<li><strong>分区（Partition）</strong>
+<ul>
+<li>本质：HDFS 上的<strong>目录</strong>（<code>.../date=20251222/</code>），用于<strong>裁剪扫描范围（Pruning）</strong>，提升查询效率。</li>
+<li>字段选择：低基数、查询过滤高频字段（如日期、地域）；<strong>不要求</strong>均匀分布。</li>
+</ul>
+</li>
+<li><strong>分桶（Bucketing）</strong>
+<ul>
+<li>本质：HDFS 上的<strong>文件</strong>，将数据按哈希取模（<code>hash(col) % N</code>）分散到 N 个文件中。</li>
+<li>作用：优化 Join（<strong>Bucket Join/SMB Join</strong>），优化抽样（Sampling），缓解数据倾斜。</li>
+<li>字段选择：高基数、离散分布字段（如 UserID），避免热点。</li>
+</ul>
+</li>
+</ul>
+<h3 id="8-2-考点说明">8.2 考点说明</h3>
+<ul>
+<li><strong>易错点与辨析</strong>
+<ul>
+<li><strong>分区 vs 分桶</strong>：分区是“分目录”，分桶是“分文件”。表可同时分区和分桶，但<strong>不能</strong>用同一个字段既分区又分桶。</li>
+<li><strong>分桶写入约束</strong>：必须使用 <code>INSERT ... SELECT</code> 触发 MapReduce 进行 Hash 分发；<code>LOAD DATA</code> 只是文件移动，不会重新 Hash 分桶。</li>
+<li><strong>分区粒度选择</strong>：范围分区（Range Partition）不要求每个区间大小完全一致，应根据业务数据量决定（如近一个月按天，历史按月）。</li>
+</ul>
+</li>
+</ul>
+<h3 id="8-3-思考题">8.3 思考题</h3>
+<ul>
+<li>如果一个表的数据量很大，但查询时很少用到过滤条件，还有必要做分区吗？为什么？</li>
+<li>为什么 <code>LOAD DATA</code> 命令不能保证分桶表的存储约束？（提示：文件系统操作 vs 计算引擎操作）</li>
+</ul>
+<hr>
+<h2 id="9-HBase-列族存储模型与系统架构">9. HBase 列族存储模型与系统架构</h2>
+<h3 id="9-1-关键知识点">9.1 关键知识点</h3>
+<ul>
+<li><strong>HBase 定位</strong>
+<ul>
+<li>基于 Google BigTable 论文实现的开源分布式列式数据库（NoSQL）。</li>
+<li>适用场景：海量数据（PB 级）、高吞吐随机读写、稀疏数据存储。</li>
+<li>数据模型：
+<ul>
+<li><strong>表（Table）</strong>：逻辑上由行和列组成，物理上按列族存储。</li>
+<li><strong>行键（RowKey）</strong>：唯一标识一行，按字典序排序（Lexicographical Order）。设计核心：避免<strong>热点（Hotspotting）</strong>，利用排序优化扫描。</li>
+<li><strong>列族（Column Family）</strong>：列的集合，<strong>物理存储的基本单元</strong>（Schema 层面定义）。权限控制、压缩、缓存等都在列族级别设置。</li>
+<li><strong>时间戳（Timestamp）</strong>：支持<strong>多版本（Multi-version）</strong>，默认返回最新版本。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>系统架构</strong>
+<ul>
+<li><strong>HMaster</strong>：管理节点，负责 <strong>Region 分配（Assignment）</strong>、<strong>负载均衡（Load Balancing）</strong>、DDL 操作（创建/删除表）。<strong>不参与读写路径</strong>。</li>
+<li><strong>RegionServer</strong>：工作节点，负责处理数据的读写请求，管理 <strong>Region（Split/Compact）</strong>。</li>
+<li><strong>ZooKeeper</strong>：协调节点，负责 HMaster 选主、RegionServer 状态监控、元数据入口（<code>hbase:meta</code> 位置）。</li>
+<li><strong>HDFS</strong>：底层文件系统，负责持久化存储 <strong>HFile</strong> 和 <strong>WAL</strong>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="9-2-考点说明">9.2 考点说明</h3>
+<ul>
+<li><strong>HBase 架构与组件</strong>
+<ul>
+<li><strong>易错点</strong>：<strong>HMaster 不参与数据的读写流程</strong>。客户端直接连接 ZooKeeper 获取元数据，然后连接 RegionServer 读写数据。HMaster 宕机短时间内不影响读写。</li>
+<li><strong>易错点</strong>：<strong>Region</strong> 是分布式存储和负载均衡的最小单元；<strong>Store</strong> 是物理存储的最小单元（一个 Column Family 对应一个 Store）。</li>
+</ul>
+</li>
+<li><strong>LSM-Tree 读写流程</strong>
+<ul>
+<li><strong>写流程</strong>：
+<ol>
+<li>写入 **WAL（Write-Ahead Log）**保证持久性。</li>
+<li>写入内存 <strong>MemStore</strong>。</li>
+<li>MemStore 达到阈值触发 <strong>Flush</strong>，生成磁盘文件 <strong>HFile</strong>。</li>
+</ol>
+</li>
+<li><strong>读流程</strong>：
+<ul>
+<li>优先查 <strong>BlockCache（读缓存）</strong>，再查 <strong>MemStore（写缓存）</strong>，最后查 <strong>HFile（磁盘）</strong>。</li>
+<li>使用 <strong>BloomFilter</strong> 快速判断行/列是否存在于 HFile 中，减少磁盘 I/O。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Compaction 机制</strong>
+<ul>
+<li><strong>Minor Compaction</strong>：合并少量 HFile，减少文件数，<strong>不清理</strong>过期/删除数据。</li>
+<li><strong>Major Compaction</strong>：合并所有 HFile 为一个，<strong>清理</strong>过期/删除数据（物理删除）。开销大，通常手动或在低峰期触发。</li>
+</ul>
+</li>
+<li><strong>RowKey 设计与列族</strong>
+<ul>
+<li><strong>RowKey</strong>：长度原则（越短越好）、散列原则（避免热点，如反转、加 Salt、Hash）、唯一原则。</li>
+<li><strong>列族数量</strong>：<strong>不宜过多（通常 1-3 个）</strong>。原因：Flush 是 Region 级别的，一个列族 Flush 会触发该 Region 下所有列族 Flush，导致产生大量小文件和不必要的 I/O 开销。</li>
+</ul>
+</li>
+<li><strong>预分区（Pre-splitting）</strong>
+<ul>
+<li><strong>作用</strong>：建表时预先划分 Region，避免数据初始写入时全部挤在一个 Region 导致热点，利用集群并发能力。</li>
+</ul>
+</li>
+</ul>
+<h3 id="9-3-思考题">9.3 思考题</h3>
+<ul>
+<li>为什么 HBase 适合写多读少的场景？（提示：LSM-Tree 将随机写转换为顺序写）</li>
+<li>HBase 中 HMaster 挂掉会对集群有什么影响？读写请求是否立刻中断？</li>
+<li>简述 Major Compaction 和 Minor Compaction 的区别及对业务的影响。</li>
+</ul>
+<hr>
+<h2 id="10-Kafka-分布式消息队列与分区有序性">10. Kafka 分布式消息队列与分区有序性</h2>
+<h3 id="10-1-关键知识点">10.1 关键知识点</h3>
+<ul>
+<li><strong>核心概念</strong>
+<ul>
+<li><strong>Broker</strong>：Kafka 节点。</li>
+<li><strong>Topic</strong>：消息的逻辑分类。</li>
+<li><strong>Partition</strong>：Topic 的物理分片，并行处理的基本单元。每个 Partition 是一个有序的、不可变的<strong>追加日志（Append-only Log）</strong>。</li>
+<li><strong>Offset</strong>：消息在 Partition 中的唯一标识（偏移量）。</li>
+<li><strong>Producer</strong>：消息生产者，决定消息写入哪个 Partition（Hash Key 或轮询）。</li>
+<li><strong>Consumer Group</strong>：消费者组，组内消费者共同消费一个 Topic，实现负载均衡。</li>
+</ul>
+</li>
+<li><strong>ZooKeeper 作用</strong>
+<ul>
+<li>存储元数据（Broker 信息、Topic 配置等），管理 Controller 选举。（注：新版 Kafka 正逐步移除 ZK 依赖，转向 <strong>KRaft 模式</strong>，但考试通常基于经典架构）。</li>
+</ul>
+</li>
+</ul>
+<h3 id="10-2-考点说明">10.2 考点说明</h3>
+<ul>
+<li><strong>消息有序性</strong>
+<ul>
+<li><strong>考点</strong>：Kafka 只能保证 <strong>Partition 级别</strong> 的有序性，不能保证 <strong>Topic 级别</strong>（全局）的有序性。</li>
+<li><strong>应用</strong>：如果业务要求严格顺序（如订单状态流转），必须将相关消息（如同一 OrderID）发送到同一个 Partition（通过 Key Hash）。</li>
+</ul>
+</li>
+<li><strong>Consumer Group 并行度</strong>
+<ul>
+<li><strong>规则</strong>：一个 Partition 在同一时刻只能被消费者组内的一个 Consumer 消费。</li>
+<li><strong>推论</strong>：Consumer 数量多于 Partition 数量时，多余的 Consumer 会空闲。<strong>最大并行度 = Partition 数量</strong>。</li>
+</ul>
+</li>
+<li><strong>消息交付语义</strong>
+<ul>
+<li><strong>At-most-once（至多一次）</strong>：可能丢，不重复。</li>
+<li><strong>At-least-once（至少一次）</strong>：不丢，可能重复（默认）。</li>
+<li><strong>Exactly-once（精确一次）</strong>：通过<strong>幂等性</strong> Producer 和<strong>事务支持</strong>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="10-3-思考题">10.3 思考题</h3>
+<ul>
+<li>如果要求所有消息全局有序，Kafka 应该如何配置？（提示：Topic 只能有 1 个 Partition）</li>
+<li>Kafka 为什么读写吞吐量高？（提示：顺序写磁盘、零拷贝 Zero-Copy、页缓存 PageCache）</li>
+<li>Consumer Group 中 Consumer 的数量超过 Partition 数量会有什么后果？</li>
+</ul>
+<hr>
+<h2 id="11-数据采集与流处理基础">11. 数据采集与流处理基础</h2>
+<h3 id="11-1-关键知识点">11.1 关键知识点</h3>
+<ul>
+<li><strong>Flume</strong>
+<ul>
+<li>分布式、可靠、高可用的海量日志采集、聚合和传输系统。</li>
+<li><strong>架构</strong>：<strong>Agent</strong> 是基本单元，包含 <strong>Source（采集）</strong>、<strong>Channel（缓冲）</strong>、<strong>Sink（输出）</strong>。</li>
+<li><strong>事务</strong>：Source 到 Channel、Channel 到 Sink 都有事务保证。</li>
+</ul>
+</li>
+<li><strong>流处理框架对比</strong>
+<ul>
+<li><strong>Spark Streaming</strong>：<strong>微批处理（Micro-batch）</strong>，将流切分为小的时间片（RDD），高吞吐，秒级延迟。</li>
+<li><strong>Flink</strong>：<strong>原生流处理（Native Streaming）</strong>，<strong>事件驱动（Event-driven）</strong>，低延迟（毫秒级），支持状态管理（State）和事件时间（Event Time）。
+<ul>
+<li><strong>能力辨析</strong>：Flink 也能高效处理<strong>有界流（Bounded Stream）</strong>，即批处理（Batch）被视为流处理的特例。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="11-2-考点说明">11.2 考点说明</h3>
+<ul>
+<li><strong>Flume 组件与架构</strong>
+<ul>
+<li><strong>Agent 结构</strong>：Source -&gt; Channel -&gt; Sink。</li>
+<li><strong>Channel 类型</strong>：
+<ul>
+<li><strong>Memory Channel</strong>：内存缓冲，速度快，但断电丢数据。</li>
+<li><strong>File Channel</strong>：磁盘缓冲，可靠性高，速度较慢。</li>
+</ul>
+</li>
+<li><strong>拓扑结构</strong>：支持串联（Hop）、复制（Replication）、多路复用（Multiplexing/Fan-out）、聚合（Fan-in）。</li>
+</ul>
+</li>
+<li><strong>Spark Streaming vs Flink</strong>
+<ul>
+<li><strong>模型差异</strong>：Spark Streaming 是微批（模拟流），Flink 是真流。</li>
+<li><strong>窗口（Window）</strong>：<strong>滚动窗口（Tumbling）</strong>、<strong>滑动窗口（Sliding）</strong>、<strong>会话窗口（Session）</strong>。</li>
+<li><strong>工具定位辨析</strong>：Tez 是 DAG 计算引擎（常用于 Hive/Pig 底层优化），属于计算框架而非 ETL 工具；Logstash 是日志采集工具；Kafka 是消息中间件；Kettle 是传统 ETL 工具。</li>
+</ul>
+</li>
+</ul>
+<h3 id="11-3-思考题">11.3 思考题</h3>
+<ul>
+<li>简述 Flume 中 Memory Channel 和 File Channel 的适用场景。</li>
+<li>什么是“背压”（Backpressure）？流处理系统中如何处理背压？</li>
+<li>Spark Streaming 的微批模式相比 Flink 的事件驱动模式，有什么优缺点？</li>
+</ul>
+<hr>
+<h2 id="12-数仓、数据集市与数据湖">12. 数仓、数据集市与数据湖</h2>
+<h3 id="12-1-关键知识点">12.1 关键知识点</h3>
+<ul>
+<li><strong>数据仓库（Data Warehouse）</strong>
+<ul>
+<li><strong>定义</strong>：<strong>面向主题的（Subject-Oriented）</strong>、<strong>集成的（Integrated）</strong>、<strong>相对稳定的（Non-Volatile）</strong>、**反映历史变化（Time-Variant）**的数据集合，用于支持管理决策。</li>
+<li><strong>分层架构</strong>：<strong>ODS（贴源层）</strong>-&gt; <strong>DWD（明细层）</strong>-&gt; <strong>DWS（汇总层）</strong>-&gt; <strong>ADS（应用层）</strong>。</li>
+</ul>
+</li>
+<li><strong>数据湖（Data Lake）</strong>
+<ul>
+<li>存储原始数据（Raw Data），支持结构化、半结构化、非结构化数据。</li>
+<li><strong>Schema-on-Read（读时模式）</strong>：使用时定义结构，灵活性高。</li>
+</ul>
+</li>
+<li><strong>ETL vs ELT</strong>
+<ul>
+<li><strong>ETL</strong>：Extract -&gt; Transform -&gt; Load（传统数仓）。</li>
+<li><strong>ELT</strong>：Extract -&gt; Load -&gt; Transform（大数据/云数仓，利用目标库算力）。</li>
+</ul>
+</li>
+</ul>
+<h3 id="12-2-考点说明">12.2 考点说明</h3>
+<ul>
+<li>
+<p><strong>数仓四大特征</strong></p>
+<ul>
+<li>必须熟记：<strong>面向主题、集成、非易失（稳定）、随时间变化</strong>。</li>
+</ul>
+</li>
+<li>
+<p><strong>数据湖 vs 数据仓库</strong></p>
+<ul>
+<li>
+<p><strong>定义</strong>：数据湖是一个集中式存储库，允许以任意规模存储所有结构化和非结构化数据。</p>
+</li>
+<li>
+<p><strong>对比</strong>：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><strong>特性</strong></th>
+<th style="text-align:left"><strong>数据仓库</strong></th>
+<th style="text-align:left"><strong>数据湖</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>数据类型</strong></td>
+<td style="text-align:left">结构化数据</td>
+<td style="text-align:left">结构化、半结构化、非结构化</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Schema</strong></td>
+<td style="text-align:left"><strong>写时模式（Schema-on-Write）</strong></td>
+<td style="text-align:left"><strong>读时模式（Schema-on-Read）</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>灵活性</strong></td>
+<td style="text-align:left">低，需预定义模型</td>
+<td style="text-align:left">高，敏捷探索</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>用户</strong></td>
+<td style="text-align:left">业务分析师（报表）</td>
+<td style="text-align:left">数据科学家（挖掘/ML）</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="12-3-思考题">12.3 思考题</h3>
+<ul>
+<li>为什么说“不加治理的数据湖就是数据沼泽”？</li>
+<li>对比 Schema-on-Write 和 Schema-on-Read 的优缺点。</li>
+<li>简述数仓分层（ODS/DWD/DWS/ADS）的作用和每一层的主要职责。</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%A0%94%E7%A9%B6%E7%94%9F%E8%AF%BE%E7%A8%8B/" class="category-chain-item">研究生课程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Big-Data/" class="print-no-link">#Big Data</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>大数据理论与实践</div>
+      <div>http://example.com/2025/12/26/大数据理论与实践/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Jeremy Cheng</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年12月26日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/12/26/%E8%AF%AD%E9%9F%B3%E6%83%85%E7%BB%AA%E8%AF%86%E5%88%AB/" title="语音情绪识别">
+                        <span class="hidden-mobile">语音情绪识别</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"VuFNqHSWzChINkJFPCBgzzAA-gzGzoHsz","appKey":"CiPa7Le2LyTY1FdufKsHqM1z","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
