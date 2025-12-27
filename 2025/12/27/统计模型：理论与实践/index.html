@@ -1,0 +1,996 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.jpg">
+  <link rel="icon" href="/img/avatar.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Jeremy Cheng">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="统计模型：理论与实践 1 聚类方法 1.1 K-means 1.1.1 算法 K-Means聚类步骤是一个循环迭代的算法，具体·步骤如下：  1、先随机选取K个对象作为初始的聚类中心，随机选择K个初始中心点； 2、计算每个对象与各个种子聚类中心之间的距离，按照距离初始中心点最小的原则，把每个对象分配给距离它最近的聚类中心。聚类中心以及分配给它们的对象就代表一个聚类。 3、一旦全部对象都被分配了，每">
+<meta property="og:type" content="article">
+<meta property="og:title" content="统计模型：理论与实践">
+<meta property="og:url" content="http://example.com/2025/12/27/%E7%BB%9F%E8%AE%A1%E6%A8%A1%E5%9E%8B%EF%BC%9A%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5/index.html">
+<meta property="og:site_name" content="自渡 × 稊园">
+<meta property="og:description" content="统计模型：理论与实践 1 聚类方法 1.1 K-means 1.1.1 算法 K-Means聚类步骤是一个循环迭代的算法，具体·步骤如下：  1、先随机选取K个对象作为初始的聚类中心，随机选择K个初始中心点； 2、计算每个对象与各个种子聚类中心之间的距离，按照距离初始中心点最小的原则，把每个对象分配给距离它最近的聚类中心。聚类中心以及分配给它们的对象就代表一个聚类。 3、一旦全部对象都被分配了，每">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2025/12/27/%E7%BB%9F%E8%AE%A1%E6%A8%A1%E5%9E%8B%EF%BC%9A%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5/EM1.jpg">
+<meta property="og:image" content="http://example.com/2025/12/27/%E7%BB%9F%E8%AE%A1%E6%A8%A1%E5%9E%8B%EF%BC%9A%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5/EM2.jpg">
+<meta property="og:image" content="http://example.com/2025/12/27/%E7%BB%9F%E8%AE%A1%E6%A8%A1%E5%9E%8B%EF%BC%9A%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5/EM4.jpg">
+<meta property="og:image" content="http://example.com/2025/12/27/%E7%BB%9F%E8%AE%A1%E6%A8%A1%E5%9E%8B%EF%BC%9A%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5/EM-3.jpg">
+<meta property="og:image" content="https://bkimg.cdn.bcebos.com/formula/b8585932ec03431bfb99e8bc9e71b0e5.svg">
+<meta property="og:image" content="https://bkimg.cdn.bcebos.com/formula/10879047f080bb0c3c4a633857c9a145.svg">
+<meta property="og:image" content="https://bkimg.cdn.bcebos.com/formula/6a1d02c5b9c843affb0dbd114d4c5e50.svg">
+<meta property="og:image" content="https://bkimg.cdn.bcebos.com/formula/93c0a560786d51ceb45a966017226b51.svg">
+<meta property="og:image" content="https://bkimg.cdn.bcebos.com/formula/10d6f4a0aa95d6f43c0d00337198fe3d.svg">
+<meta property="og:image" content="https://bkimg.cdn.bcebos.com/formula/18eec2867cad0719b88aa85f3dce25dc.svg">
+<meta property="og:image" content="https://bkimg.cdn.bcebos.com/formula/b971eeefaf3de15ffebda311893d6b70.svg">
+<meta property="og:image" content="https://bkimg.cdn.bcebos.com/formula/138a1fe311759c96a4e5a5f64b8edd55.svg">
+<meta property="article:published_time" content="2025-12-27T09:41:37.000Z">
+<meta property="article:modified_time" content="2025-12-27T13:36:34.924Z">
+<meta property="article:author" content="Jeremy Cheng">
+<meta property="article:tag" content="EM">
+<meta property="article:tag" content="NLP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2025/12/27/%E7%BB%9F%E8%AE%A1%E6%A8%A1%E5%9E%8B%EF%BC%9A%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5/EM1.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>统计模型：理论与实践 - 自渡 × 稊园</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"VuFNqHSWzChINkJFPCBgzzAA-gzGzoHsz","app_key":"CiPa7Le2LyTY1FdufKsHqM1z","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>JeremyIrving的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="统计模型：理论与实践"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-12-27 17:41" pubdate>
+          2025年12月27日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          28 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">统计模型：理论与实践</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1>统计模型：理论与实践</h1>
+<h2 id="1-聚类方法">1 聚类方法</h2>
+<h3 id="1-1-K-means">1.1 K-means</h3>
+<h4 id="1-1-1-算法">1.1.1 算法</h4>
+<p>K-Means聚类步骤是一个循环迭代的算法，具体·步骤如下：</p>
+<ul>
+<li>1、先随机选取K个对象作为初始的聚类中心，随机选择K个初始中心点；</li>
+<li>2、计算每个对象与各个种子聚类中心之间的距离，按照<strong>距离初始中心点最小</strong>的原则，把每个对象分配给距离它最近的聚类中心。聚类中心以及分配给它们的对象就代表一个聚类。</li>
+<li>3、一旦全部对象都被分配了，每个聚类的聚类中心会根据聚类中现有的对象被重新计算。这个过程将不断重复直到满足某个终止条件。终止条件可以是以下任何一个：</li>
+</ul>
+<p>1）没有（或最小数目）对象被重新分配给不同的聚类。 2）没有（或最小数目）聚类中心再发生变化。 3）误差平方和局部最小。4）达到固定的迭代次数终止条件。</p>
+<p>因此得到相互分离的球状聚类，在这些聚类中，均值点趋向收敛于聚类中心。 一般会希望得到的聚类大小大致相当，这样把每个观测都分配到离它最近的聚类中心（即均值点）就是比较正确的分配方案。</p>
+<h4 id="1-1-2-细节">1.1.2 细节</h4>
+<ul>
+<li>
+<p>选择正确的k：观察随着k变化到中心的平均距离，会先快速下降然后几乎不变。</p>
+</li>
+<li>
+<p>优缺点：</p>
+<p><strong>优点</strong></p>
+<ul>
+<li>效率较高：时间复杂度为 (O(tkn))，其中 n 为数据对象数量，k 为聚类数量，t 为迭代次数。通常情况下，k 和 t 远小于 n（(k, t &lt;&lt; n)）。</li>
+<li>通常会收敛到局部最优解。可通过模拟退火、遗传算法等技术求解全局最优解。</li>
+</ul>
+<p><strong>缺点</strong></p>
+<ul>
+<li>仅适用于均值有定义的数据（分类数据该如何处理？）。</li>
+<li>需预先指定聚类数量 k。</li>
+<li>对噪声数据和离群点敏感（处理此类数据时存在困难）。</li>
+<li>不适合发现非凸形状的聚类。</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2">1.2</h3>
+<h2 id="2-EM">2 EM</h2>
+<h3 id="2-1-基本原理">2.1 基本原理</h3>
+<img src="/2025/12/27/%E7%BB%9F%E8%AE%A1%E6%A8%A1%E5%9E%8B%EF%BC%9A%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5/EM1.jpg" srcset="/img/loading.gif" lazyload class="" title="EM数学原理-1">
+<img src="/2025/12/27/%E7%BB%9F%E8%AE%A1%E6%A8%A1%E5%9E%8B%EF%BC%9A%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5/EM2.jpg" srcset="/img/loading.gif" lazyload class="" title="EM数学原理-2">
+<h3 id="2-2-优缺点">2.2 优缺点</h3>
+<img src="/2025/12/27/%E7%BB%9F%E8%AE%A1%E6%A8%A1%E5%9E%8B%EF%BC%9A%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5/EM4.jpg" srcset="/img/loading.gif" lazyload class="" title="EM优缺点">
+<h3 id="2-3-应用场景">2.3 应用场景</h3>
+<img src="/2025/12/27/%E7%BB%9F%E8%AE%A1%E6%A8%A1%E5%9E%8B%EF%BC%9A%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5/EM-3.jpg" srcset="/img/loading.gif" lazyload class="" title="EM适用场景">
+<h3 id="2-4-最大似然估计">2.4 最大似然估计</h3>
+<p>给定一个<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83/0?fromModule=lemma_inlink">概率分布</a>D，假定其<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0/0?fromModule=lemma_inlink">概率密度函数</a>（<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%BF%9E%E7%BB%AD%E5%88%86%E5%B8%83/22719278?fromModule=lemma_inlink">连续分布</a>）或概率聚集函数（<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%A6%BB%E6%95%A3%E5%88%86%E5%B8%83/22719277?fromModule=lemma_inlink">离散分布</a>）为<em>f**D</em>，以及一个分布参数θ，我们可以从这个分布中抽出一个具有<em>n</em>个值的采样X1,X2,…,Xn，通过利用<em>f**D</em>，我们就能计算出其概率：</p>
+<p><img src="https://bkimg.cdn.bcebos.com/formula/b8585932ec03431bfb99e8bc9e71b0e5.svg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>但是，我们可能不知道θ的值，尽管我们知道这些采样数据来自于分布D。那么我们如何才能估计出θ呢？一个自然的想法是从这个分布中抽出一个具有<em>n</em>个值的采样X1,X2,…,Xn，然后用这些采样数据来估计θ。</p>
+<p>一旦我们获得，我们就能从中找到一个关于θ的估计。最大似然估计会寻找关于 θ的最可能的值（即，在所有可能的θ取值中，寻找一个值使这个采样的“可能性”最大化）。这种方法正好同一些其他的估计方法不同，如θ的非偏估计，非偏估计未必会输出一个最可能的值，而是会输出一个既不高估也不<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%BD%8E%E4%BC%B0/0?fromModule=lemma_inlink">低估</a>的θ值。</p>
+<p>要在数学上实现最大似然<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%BC%B0%E8%AE%A1%E6%B3%95/0?fromModule=lemma_inlink">估计法</a>，我们首先要定义可能性：</p>
+<p><img src="https://bkimg.cdn.bcebos.com/formula/10879047f080bb0c3c4a633857c9a145.svg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>并且在θ的所有取值上，使这个函数最大化。这个使可能性最大的值即被称为θ的<strong>最大似然估计</strong>。</p>
+<p><strong>基于对似然函数L(θ)形式(一般为连乘式且各因式&gt;0)的考虑，求θ的最大似然估计的一般步骤如下：</strong></p>
+<p>(1)写出似然函数</p>
+<p>总体X为离散型时：</p>
+<p><img src="https://bkimg.cdn.bcebos.com/formula/6a1d02c5b9c843affb0dbd114d4c5e50.svg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>总体X为连续型时：</p>
+<p><img src="https://bkimg.cdn.bcebos.com/formula/93c0a560786d51ceb45a966017226b51.svg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>(2)对似然函数两边取对数有</p>
+<p>总体X为离散型时：</p>
+<p><img src="https://bkimg.cdn.bcebos.com/formula/10d6f4a0aa95d6f43c0d00337198fe3d.svg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>总体X为连续型时：</p>
+<p><img src="https://bkimg.cdn.bcebos.com/formula/18eec2867cad0719b88aa85f3dce25dc.svg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>(3)对</p>
+<p><img src="https://bkimg.cdn.bcebos.com/formula/b971eeefaf3de15ffebda311893d6b70.svg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>求导数并令之为0：</p>
+<p><img src="https://bkimg.cdn.bcebos.com/formula/138a1fe311759c96a4e5a5f64b8edd55.svg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>此方程为对数似然方程。解对数似然方程所得，即为未知参数 的最大似然估计值。</p>
+<h2 id="3-分类——决策树">3 分类——决策树</h2>
+<ul>
+<li>结点和有向边组成</li>
+<li>结点有内部结点和叶结点俩种类型</li>
+<li>内部结点表示一个特征，叶节点表示 一个类</li>
+</ul>
+<h3 id="3-1-选择节点特征——信息熵与信息增益">3.1 选择节点特征——信息熵与信息增益</h3>
+<p>对于有K个类别的分类问题来说，假定 样本集合D中第 k 类样本所占的比例 为pk（k=1,2,…,K）,则样本集合D的 <strong>信息熵</strong>定义为:</p>
+<p class="katex-block "><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>E</mi><mi>n</mi><mi>t</mi><mo stretchy="false">(</mo><mi>D</mi><mo stretchy="false">)</mo><mo>=</mo><mo>−</mo><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>K</mi></munderover><msub><mi>p</mi><mi>k</mi></msub><mo>⋅</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><msub><mi>p</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">Ent(D) = -\sum_{k=1}^{K} p_k \cdot log_2 p_k
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord mathnormal">n</span><span class="mord mathnormal">t</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:3.1304em;vertical-align:-1.3021em;"></span><span class="mord">−</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.8283em;"><span style="top:-1.8479em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.07153em;">K</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.3021em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span></p>
+<p>在决策树的分类问题中，信息增益 (information gain)是针对一个特定的 分支标准（branching criteria）T，计 算原有数据的信息熵与引入该分支标 准后的信息熵之差。信息增益的定义 如下：</p>
+<p class="katex-block "><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>G</mi><mi>a</mi><mi>i</mi><mi>n</mi><mo stretchy="false">(</mo><mi>D</mi><mo separator="true">,</mo><mi>a</mi><mo stretchy="false">)</mo><mo>=</mo><mi>E</mi><mi>n</mi><mi>t</mi><mo stretchy="false">(</mo><mi>D</mi><mo stretchy="false">)</mo><mo>−</mo><munderover><mo>∑</mo><mrow><mi>v</mi><mo>=</mo><mn>1</mn></mrow><mi>V</mi></munderover><mfrac><mrow><mi mathvariant="normal">∣</mi><msup><mi>D</mi><mi>v</mi></msup><mi mathvariant="normal">∣</mi></mrow><mrow><mi mathvariant="normal">∣</mi><mi>D</mi><mi mathvariant="normal">∣</mi></mrow></mfrac><mi>E</mi><mi>n</mi><mi>t</mi><mo stretchy="false">(</mo><msup><mi>D</mi><mi>v</mi></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Gain(D, a) = Ent(D) - \sum_{v=1}^{V} \frac{|D^v|}{|D|} Ent(D^v)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">G</span><span class="mord mathnormal">ain</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">a</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord mathnormal">n</span><span class="mord mathnormal">t</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:3.0954em;vertical-align:-1.2671em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.8283em;"><span style="top:-1.8829em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">v</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.22222em;">V</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2671em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">∣</span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mord">∣</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">∣</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">v</span></span></span></span></span></span></span></span><span class="mord">∣</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord mathnormal">n</span><span class="mord mathnormal">t</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7144em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">v</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span></p>
+<h3 id="3-2-ID3算法">3.2 ID3算法</h3>
+<ul>
+<li>使用所有没有使用的属性并计算与之 相关的样本熵值</li>
+<li>选取其中熵值最小的属性</li>
+<li>生成包含该属性的节点</li>
+</ul>
+<h3 id="3-3-C4-5算法">3.3 C4.5算法</h3>
+<h3 id="3-4-CART算法">3.4 CART算法</h3>
+<h2 id="4-Gamma函数计算">4 Gamma函数计算</h2>
+<p class="katex-block "><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="normal">Γ</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mi mathvariant="normal">∞</mi></msubsup><msup><mi>t</mi><mrow><mi>z</mi><mo>−</mo><mn>1</mn></mrow></msup><msup><mi>e</mi><mrow><mo>−</mo><mi>t</mi></mrow></msup><mi>d</mi><mi>t</mi><mo separator="true">,</mo><mspace width="1em"/><mtext>其中 </mtext><mi>z</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\Gamma(z) = \int_{0}^{\infty} t^{z-1} e^{-t} dt, \quad 其中\ z &gt; 0
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Γ</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.3262em;vertical-align:-0.9119em;"></span><span class="mop"><span class="mop op-symbol large-op" style="margin-right:0.44445em;position:relative;top:-0.0011em;">∫</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4143em;"><span style="top:-1.7881em;margin-left:-0.4445em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">0</span></span></span></span><span style="top:-3.8129em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">∞</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9119em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.04398em;">z</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8436em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mathnormal mtight">t</span></span></span></span></span></span></span></span></span><span class="mord mathnormal">d</span><span class="mord mathnormal">t</span><span class="mpunct">,</span><span class="mspace" style="margin-right:1em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord cjk_fallback">其中</span><span class="mspace"> </span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span></span></p>
+<p class="katex-block "><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="normal">Γ</mi><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo>=</mo><mi>x</mi><mi mathvariant="normal">Γ</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mspace linebreak="newline"></mspace><mi mathvariant="normal">Γ</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo stretchy="false">!</mo></mrow><annotation encoding="application/x-tex">\Gamma(x+1)=x\Gamma(x)\\\Gamma(n)=(n-1)!
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Γ</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">x</span><span class="mord">Γ</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Γ</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)!</span></span></span></span></span></p>
+<p class="katex-block "><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="normal">Γ</mi><mrow><mo fence="true">(</mo><mi>n</mi><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo fence="true">)</mo></mrow><mo>=</mo><mfrac><mrow><mo stretchy="false">(</mo><mn>2</mn><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo stretchy="false">!</mo><mo stretchy="false">!</mo></mrow><msup><mn>2</mn><mi>n</mi></msup></mfrac><msqrt><mi>π</mi></msqrt></mrow><annotation encoding="application/x-tex">\Gamma\left(n + \frac{1}{2}\right) = \frac{(2n-1)!!}{2^n} \sqrt{\pi}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.4em;vertical-align:-0.95em;"></span><span class="mord">Γ</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">(</span></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">)</span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.113em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.5904em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">(</span><span class="mord">2</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mclose">)!!</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8492em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord mathnormal" style="margin-right:0.03588em;">π</span></span></span><span style="top:-2.8092em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.08em" viewBox="0 0 400000 1080" preserveAspectRatio="xMinYMin slice"><path d="M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.1908em;"><span></span></span></span></span></span></span></span></span></span></p>
+<h2 id="5-四个基础分布">5 四个基础分布</h2>
+<h3 id="5-1-二项分布（Binomial-Distribution）">5.1 二项分布（Binomial Distribution）</h3>
+<h4 id="核心特性">核心特性</h4>
+<ul>
+<li>属于<strong>离散分布</strong>，适用于 dichotomous 结果场景（仅两种可能结果，如成功 / 失败、合格 / 不合格）。</li>
+<li>关键前提：每次试验 “成功” 概率恒定、各试验相互独立。</li>
+</ul>
+<h4 id="数学表达">数学表达</h4>
+<ul>
+<li>概率质量函数（PMF）：(P_{B}(R=r | n, p) = \binom{n}{r} p^{r}(1-p)^{n-r})，其中(\binom{n}{r} = \frac{n!}{r!(n-r)!})。</li>
+<li>符号说明：R为二项随机变量（成功次数），n为试验次数，p为单次试验成功概率，(q=1-p)为失败概率。</li>
+<li>累积分布函数（CDF）：(F(x \leq k) = \sum_{x=0}^{k} \binom{n}{x} p^{x} q^{n-x})（表示 k 次及以下成功的概率）。</li>
+</ul>
+<h4 id="数字特征">数字特征</h4>
+<ul>
+<li>均值：(E® = \mu = np)</li>
+<li>方差：(Var® = \sigma^{2} = np(1-p) = npq)</li>
+</ul>
+<h4 id="应用场景与近似">应用场景与近似</h4>
+<ul>
+<li>常见场景：质量控制（产品合格判定）、可靠性分析、抽样调查。</li>
+<li>近似条件：当(p \to 0)且(n \to \infty)时，可近似为泊松分布；当(p \leq 0.5)且(np &gt; 5)（或(p &gt; 0.5)且(nq &gt; 5)）时，可近似为正态分布。</li>
+</ul>
+<h4 id="实例">实例</h4>
+<ul>
+<li>问题：批量生产中，每件产品缺陷率 10%，随机抽取 20 件，样本中缺陷数≤3 则接收该批次，求接收概率。</li>
+<li>计算：(F(x \leq 3) = \sum_{x=0}^{3} \binom{20}{x}(0.1)^{x}(0.9)^{20-x} = 0.867)，即接收概率为 86.7%。</li>
+</ul>
+<hr>
+<h3 id="5-2-泊松分布（Poisson-Distribution）">5.2 泊松分布（Poisson Distribution）</h3>
+<h4 id="核心特性-2">核心特性</h4>
+<ul>
+<li>属于<strong>离散分布</strong>，用于描述一定时间 / 空间内 “稀有事件” 的发生次数。</li>
+<li>关键前提：事件发生概率小、相互独立、发生速率恒定。</li>
+</ul>
+<h4 id="数学表达-2">数学表达</h4>
+<ul>
+<li>概率质量函数（PMF）：(P_{P}(X=k | m) = \frac{e^{-m} m^{k}}{k!})，也可表示为(f(x) = \frac{e^{-\lambda} \lambda^{x}}{x!})。</li>
+<li>符号说明：X为泊松随机变量（事件发生次数），(e=2.718…)（自然常数），(m=\lambda)为事件平均发生次数。</li>
+<li>累积分布函数（CDF）：(F(x \leq k) = \sum_{x=0}^{k} \frac{e^{-\lambda} \lambda^{x}}{x!})（表示 k 次及以下发生的概率）。</li>
+</ul>
+<h4 id="数字特征-2">数字特征</h4>
+<ul>
+<li>均值：(E(X) = \mu = m = \lambda)</li>
+<li>方差：(Var(X) = \sigma^{2} = m = \lambda)（均值与方差相等是泊松分布的重要特征）。</li>
+</ul>
+<h4 id="应用场景与近似-2">应用场景与近似</h4>
+<ul>
+<li>常见场景：质量控制（缺陷数统计）、排队论（顾客到达次数）、物理现象（粒子撞击次数）。</li>
+<li>近似条件：当(\lambda &gt; 5)时，可近似为正态分布。</li>
+</ul>
+<h4 id="实例-2">实例</h4>
+<ul>
+<li>问题：某种血清注射的不良反应率为 0.001，1000 人注射，求 2 人及以上出现不良反应的概率。</li>
+<li>计算：(\lambda = np = 1000×0.001 = 1)，(1 - F(x \leq 1) = 1 - \sum_{x=0}^{1} \frac{e^{-1} 1^{x}}{x!} = 0.264)，即概率为 26.4%。</li>
+</ul>
+<hr>
+<h3 id="5-3-指数分布（Exponential-Distribution）">5.3 指数分布（Exponential Distribution）</h3>
+<h4 id="核心特性-3">核心特性</h4>
+<ul>
+<li>属于<strong>连续分布</strong>，描述 “两次稀有事件发生的时间 / 距离间隔”。</li>
+<li>关键前提：需满足泊松分布的所有特性（事件独立、速率恒定等），是泊松分布的 “间隔分布”。</li>
+</ul>
+<h4 id="数学表达-3">数学表达</h4>
+<ul>
+<li>概率密度函数（PDF）：(f_{E}(T=t | m) = me^{-mt})，也可表示为(f(x) = \lambda e^{-\lambda x})。</li>
+<li>符号说明：T为指数随机变量（间隔时间），(m=\lambda)为泊松分布的平均发生速率，(t=x)为间隔时长。</li>
+<li>累积分布函数（CDF）：(F(x \leq k) = \int_{0}^{k} \lambda e^{-\lambda x} dx = 1 - e^{-\lambda k})（表示间隔≤k 的概率）。</li>
+</ul>
+<h4 id="数字特征-3">数字特征</h4>
+<ul>
+<li>均值：(E(T) = \mu = \frac{1}{m} = \frac{1}{λ})（平均间隔时间）。</li>
+<li>方差：(Var(T) = \sigma^{2} = \frac{1}{m^{2}} = \frac{1}{λ^{2}})。</li>
+</ul>
+<h4 id="应用场景">应用场景</h4>
+<ul>
+<li>常见场景：可靠性分析（产品寿命、灯泡使用时长）、排队论（顾客到达间隔）、质量控制（故障间隔时间）。</li>
+</ul>
+<h4 id="实例-3">实例</h4>
+<ul>
+<li>问题：某品牌灯泡寿命服从指数分布，平均寿命 1000 小时，求灯泡使用超过 1000 小时的概率。</li>
+<li>计算：(\lambda = \frac{1}{1000} = 0.001)，(1 - F(x \leq 1000) = 1 - (1 - e^{-0.001×1000}) = e^{-1} = 0.368)，即概率为 36.8%。</li>
+</ul>
+<hr>
+<h3 id="5-4-正态分布（Normal-Gaussian-Distribution）">5.4 正态分布（Normal/Gaussian Distribution）</h3>
+<h4 id="核心特性-4">核心特性</h4>
+<ul>
+<li>属于<strong>连续分布</strong>，呈 “钟形曲线”，是统计学中应用最广泛的分布。</li>
+<li>关键特性：对称性、单峰性，受均值(\mu)（位置参数）和标准差(\sigma)（尺度参数）控制；许多自然现象和测量结果（如身高、体重、误差）均服从或近似服从该分布。</li>
+</ul>
+<h4 id="数学表达-4">数学表达</h4>
+<ul>
+<li>概率密度函数（PDF）：(f_{n}(y | \mu, \sigma^{2}) = \frac{1}{\sqrt{2\pi\sigma^{2}}} exp\left[ -\frac{(y - \mu)^{2}}{2\sigma^{2}} \right])。</li>
+<li>符号说明：(y=x)为随机变量取值，(\pi=3.14159…)，(exp(\cdot))为指数函数，(\mu)为均值，(\sigma)为标准差。</li>
+<li>累积分布函数（CDF）：(F(x) = \frac{1}{\sqrt{2\pi\sigma^{2}}} \int_{-\infty}^{x} exp\left[ -\frac{(v - \mu)^{2}}{2\sigma^{2}} \right] dv)，需通过标准正态分布表或软件计算。</li>
+<li>标准正态变换：令(Z = \frac{x - \mu}{\sigma})，则(Z \sim N(0,1))（均值 0、方差 1 的标准正态分布）。</li>
+</ul>
+<h4 id="数字特征-4">数字特征</h4>
+<ul>
+<li>均值：(E(Y) = \mu)</li>
+<li>方差：(Var(Y) = \sigma^{2})</li>
+</ul>
+<h4 id="应用场景与近似-3">应用场景与近似</h4>
+<ul>
+<li>常见场景：测量数据分析（如实验误差）、多因素叠加结果分析、其他分布的近似（二项、泊松）。</li>
+<li>68-95-99.7 规则：约 68% 的数据在(\mu \pm \sigma)内，95% 在(\mu \pm 2\sigma)内，99.7% 在(\mu \pm 3\sigma)内。</li>
+</ul>
+<h4 id="实例-4">实例</h4>
+<ul>
+<li>问题：某公司员工年龄服从正态分布，均值 50 岁，标准差 5 岁，求年龄在 50-52.5 岁之间的员工占比。</li>
+<li>计算：(Z_{50} = \frac{50-50}{5} = 0)（(F(Z \leq 0) = 0.5)），(Z_{52.5} = \frac{52.5-50}{5} = 0.5)（(F(Z \leq 0.5) = 0.6915)），占比为(0.6915 - 0.5 = 0.1915)，即 19.15%。</li>
+</ul>
+<hr>
+<h3 id="5-5-Beta-分布（Beta-Distribution）">5.5 Beta 分布（Beta Distribution）</h3>
+<h4 id="核心特性-5">核心特性</h4>
+<ul>
+<li>属于<strong>连续分布</strong>，随机变量取值范围被限制在 [0,1]（或指定区间([\omega_1, \omega_2])），可灵活拟合多种形状（均匀、偏态、对称）。</li>
+<li>核心用途：建模比例或百分比数据（如成功率、通过率、占比）。</li>
+</ul>
+<h4 id="数学表达-5">数学表达</h4>
+<ul>
+<li>通用概率密度函数（PDF）：(f(x | \lambda_1, \lambda_2, \omega_1, \omega_2))，其中(\omega_1 \leq x \leq \omega_2)，(\lambda_1, \lambda_2 \geq 0)。</li>
+<li>常用简化形式（(0 \leq x \leq 1)）：(f(x | \lambda_1, \lambda_2) = \frac{\Gamma(\lambda_1 + \lambda_2)}{\Gamma(\lambda_1)\Gamma(\lambda_2)} x^{\lambda_1 - 1}(1 - x)^{\lambda_2 - 1})。</li>
+<li>整数参数简化（(\lambda_1, \lambda_2)为正整数）：(f(x | \lambda_1, \lambda_2) = \frac{(\lambda_1 + \lambda_2 - 1)!}{(\lambda_1 - 1)!(\lambda_2 - 1)!} x^{\lambda_1 - 1}(1 - x)^{\lambda_2 - 1})。</li>
+<li>另一种表达（伯努利试验场景）：(f_{\beta}(q | r, n) = \frac{(n - 1)!}{(r - 1)!(n - r)!} q^{r - 1}(1 - q)^{n - r})，其中q为比例，r为成功次数，n为试验次数。</li>
+<li>累积分布函数（CDF）：(F(Q \leq q | r, n) = \frac{(n - 1)!}{(r - 1)!(n - r)!} \int_{0}^{q} v^{r - 1}(1 - v) dv)，称为 “不完全 Beta 函数”。</li>
+</ul>
+<h4 id="数字特征-5">数字特征</h4>
+<ul>
+<li>均值：(E(Q) = \mu = \frac{r}{n} = \frac{\lambda_1}{\lambda_1 + \lambda_2})。</li>
+<li>方差：(Var(Q) = \sigma^{2} = \frac{r(n - r)}{n^{2}(n + 1)} = \frac{\lambda_1\lambda_2}{(\lambda_1 + \lambda_2)^2(\lambda_1 + \lambda_2 + 1)})。</li>
+</ul>
+<h4 id="应用场景与近似-4">应用场景与近似</h4>
+<ul>
+<li>常见场景：比例数据建模（如员工福利申领率、产品合格率）、质量控制中的公差分析、PERT 网络规划、贝叶斯分析中的先验分布。</li>
+<li>近似条件：当(\lambda_1 + \lambda_2 \geq 30)时，可通过两个正态分布的差值近似。</li>
+</ul>
+<h4 id="实例-5">实例</h4>
+<ul>
+<li>问题：某公司 40 名员工，预计 30% 会提交医疗福利申领，求超过 16 人申领的概率。</li>
+<li>计算：(\mu = 0.3)（即(r = 0.3×40 = 12)），申领比例(q = \frac{16}{40} = 0.4)，查 Beta 分布表得(F_{\beta}(Q \leq 0.4 | 12, 40) = 0.91)，故超过 16 人申领的概率为(1 - 0.91 = 0.09)，即 9%。</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%A0%94%E7%A9%B6%E7%94%9F%E8%AF%BE%E7%A8%8B/" class="category-chain-item">研究生课程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/NLP/" class="print-no-link">#NLP</a>
+      
+        <a href="/tags/EM/" class="print-no-link">#EM</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>统计模型：理论与实践</div>
+      <div>http://example.com/2025/12/27/统计模型：理论与实践/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Jeremy Cheng</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年12月27日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/12/26/%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5/" title="大数据理论与实践">
+                        <span class="hidden-mobile">大数据理论与实践</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"VuFNqHSWzChINkJFPCBgzzAA-gzGzoHsz","appKey":"CiPa7Le2LyTY1FdufKsHqM1z","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
